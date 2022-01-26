@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/iframe/iframe",
+    "pages/success/success",
+    "pages/order/order",
+    "pages/login/login"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "真香电话卡助手",
+    "navigationBarTextStyle": "black"
+  }
+}
