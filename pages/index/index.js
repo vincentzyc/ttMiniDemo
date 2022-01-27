@@ -1,7 +1,7 @@
 import Api from '../../api/index'
 Page({
   data: {
-    pid: "18495",
+    pid: "25416",
     cjData: null
   },
   goOrder() {
@@ -33,7 +33,7 @@ Page({
   onLoad() {
     const options = tt.getLaunchOptionsSync()
     if (options.query) {
-      const pid = options.query.pid || '18495'
+      const pid = options.query.pid || '25416'
       this.setData({ pid: pid });
     }
     this.getPageId()
