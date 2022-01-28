@@ -1,0 +1,27 @@
+<view class="wrapper page-wrapper">
+	<view class="form-wrapper">
+		<view class="order-sum">
+			<view ks:if="{{list.length>0}}">
+				<view class="order-item" ks:for="{{list}}">
+					<view class="order-title">您的订单&nbsp;&nbsp;{{ index + 1 }}</view>
+					<view class="messBox">
+						<view class="mess-com">
+							订单编号：
+							<br />
+							{{ item.sysOrderId }}
+						</view>
+						<view class="mess-com">下单时间：{{ item.createTime }}</view>
+						<view class="mess-com">商品名称：商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称{{ item.displayProductName }}</view>
+						<view class="mess-com">收货人：{{ item.custName }}</view>
+						<view class="mess-com">手机号：{{ item.contactNumber }}</view>
+						<view class="mess-com">收货地址：{{ item.province + item.city + item.district + item.address }}</view>
+						<view class="mess-com">订单状态：{{ item.sysOrderStatusStr }}</view>
+						<view class="mess-com">物流公司：{{ item.logisticsName }}</view>
+						<view class="mess-com">物流单号：{{ item.logisticsNum }}</view>
+					</view>
+				</view>
+			</view>
+			<view ks:else class="no-data">暂无数据</view>
+		</view>
+	</view>
+</view>

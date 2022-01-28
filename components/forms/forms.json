@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "YunPopup": "/components/popup/popup",
+        "YunMarquee": "/components/marquee/marquee"
+    }
+}

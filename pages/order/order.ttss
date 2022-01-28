@@ -1,0 +1,43 @@
+.page-wrapper {
+	background-color: #ff951f;
+	min-height: 100vh;
+}
+.form-wrapper {
+	width: 80%;
+	background-color: #ffffff;
+	border-radius: 20px;
+	padding: 15px;
+	box-shadow: 1px 1px 5px #ccc;
+	margin: 20px auto;
+}
+
+.order-sum {
+	border-radius: 20px;
+	background-color: #ffffff;
+}
+.order-item {
+	margin-bottom: 20px;
+}
+.messBox {
+	border: 1px solid #9b9b9b;
+	margin: 0 auto;
+}
+.order-title {
+	font-weight: 700;
+	font-size: 14px;
+	padding-bottom: 14px;
+	text-align: center;
+}
+.mess-com {
+	border-bottom: 1px solid #797979;
+	padding: 12px 8px;
+	font-size: 14px;
+	line-height: 1.5;
+}
+.messBox .mess-com:last-child {
+	border-bottom: none;
+}
+.no-data {
+	text-align: center;
+	padding: 30px;
+}

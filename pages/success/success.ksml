@@ -1,0 +1,9 @@
+<view class="container">
+	<view class="wrapper success-wrap flex flex-center">
+		<icon class="flex" type='success' size='70' />
+		<view class="success-text">
+			<view class="success-h2">恭喜您！提交成功</view>
+			<view>尊敬的用户，您的订单已提交，请耐心等待快递上门配送，在这期间注意接听电话或查看短信信息！</view>
+		</view>
+	</view>
+</view>
