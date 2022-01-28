@@ -1,45 +1,21 @@
-/**index.css**/
-/* .skeleton {
-    width: 94%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.sk-base {
-    background-color: #f2f3f5;
-    border-radius: 30rpx;
-}
-
-.sk-banner {
-    width: 100%;
-    height: 400rpx;
-    margin-bottom: 30rpx;
-}
-
-.sk-row {
-    width: 90%;
-    height: 100rpx;
-    margin-bottom: 30rpx;
-} */
-
 .fixex-service-wrap {
 	position: fixed;
-	top: 20rpx;
-	left: 0;
+	top: 150rpx;
+	right: 0;
 	z-index: 9;
 }
 .fixex-service-wrap .fixex-service {
 	padding: 10rpx 20rpx;
 	background-image: linear-gradient(to bottom, #ffefca, #f2cc65);
-	border-top-right-radius: 40rpx;
-	border-bottom-right-radius: 40rpx;
-	font-size: 30rpx;
+	border-top-left-radius: 40rpx;
+	border-bottom-left-radius: 40rpx;
+	font-size: 24rpx;
 	color: #4f2f0a;
 	font-weight: bold;
 	margin-bottom: 20rpx;
 	z-index: 1;
+	text-align: justify;
+	text-align-last: justify;
 }
 
 .fixed-bottom {
@@ -60,7 +36,7 @@
 }
 
 .company-info {
-	margin: 10rpx;
+	margin: 20rpx;
 	font-size: 26rpx;
 	line-height: 36rpx;
 	color: #fff;

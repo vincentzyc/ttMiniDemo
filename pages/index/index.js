@@ -11,13 +11,19 @@ Page({
     // })
     tt.navigateTo({ url: '/pages/login/login' })
   },
-  openService() {
-    tt.showModal({
-      title: "客服电话",
-      content: "4008168562",
-      showCancel: false
+  complaint() {
+    const url = 'https://h5.lipush.com/h5/complaint/index.html'
+    tt.navigateTo({
+      url: '/pages/iframe/iframe?url=' + encodeURIComponent(url),
     })
   },
+  // openService() {
+  //   tt.showModal({
+  //     title: "客服电话",
+  //     content: "4008168562",
+  //     showCancel: false
+  //   })
+  // },
   async getPageId() {
     const params = { pid: this.data.pid }
     let res = await Api.Choujin.getPageId(params);

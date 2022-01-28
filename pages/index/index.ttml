@@ -1,11 +1,12 @@
 <view class="container">
   <view class="wrapper">
     <view class="fixex-service-wrap">
+      <view class="fixex-service" bindtap="complaint">投诉</view>
       <view class="fixex-service" bindtap="goOrder">订单查询</view>
-      <view class="fixex-service" bindtap="openService">联系客服</view>
     </view>
     <image class="image" src="../../assets/images/1.jpg" mode="widthFix" />
     <!-- <YuiForms class="row" cjData="{{cjData}}" id="YuiForms" bindrefreshPageId="onRefreshPageId" /> -->
+    <YunMarquee />
     <view class="company-info">
       <view class="txt">【温馨提示】</view>
       <view class="txt">1.联通大王卡月费：29元/月</view>
