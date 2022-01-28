@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/order/order",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/iframe/iframe"
   ],
   "window": {
     "backgroundTextStyle": "light",
