@@ -1,0 +1,4 @@
+<!-- index.ksml -->
+<view class="page-wrapper">
+    <web-view src="{{url}}"></web-view>
+</view>
