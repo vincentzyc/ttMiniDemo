@@ -1,0 +1,28 @@
+.marquee-wrap .scroll-wrapper {
+	overflow: hidden;
+	padding: 0;
+	margin: 10px auto 5px auto;
+	height: 44px;
+	border-radius: 44px;
+	background-color: #333;
+	font-size: 14px;
+}
+.marquee-wrap .scroll-item {
+	height: 100%;
+	padding: 2px 8px 2px 2px;
+	color: #fff;
+}
+
+.marquee-wrap .userimg {
+	height: 40px;
+	width: 40px;
+	border-radius: 100%;
+}
+
+.marquee-wrap .scroll-text {
+	margin-left: 5px;
+}
+
+.marquee-wrap .animate {
+	transition: all 0.5s linear;
+}

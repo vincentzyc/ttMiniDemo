@@ -1,0 +1,10 @@
+<view class="marquee-wrap flex flex-center">
+  <view class="scroll-wrapper">
+    <view style="{{marginTop}}" class="{{animate?'animate':''}}">
+      <view :key="i" class="flex align-middle scroll-item" tt:for="{{textList}}">
+        <image class='flex userimg flex-none' src="{{item.src}}" mode="scaleToFill" />
+        <span class="flex-auto scroll-text">{{ item.text }}</span>
+      </view>
+    </view>
+  </view>
+</view>
