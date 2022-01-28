@@ -1,17 +1,19 @@
 <view class="wrapper page-wrapper">
-	<image src='../../assets/images/login_bg.png' mode='scaleToFill' mode="widthFix"/>
-	<view class="form-wrapper">
-		<form bindsubmit='submit'>
-			<view class='flex flex-center form-item'>
-				<view class="flex-none form-label">手机号</view>
-				<input bindinput="bindNumInput" type="number" name='telephone' maxlength="11" class='flex-auto' placeholder="请输入您的手机号码" />
-			</view>
-			<view class='flex flex-center form-item'>
-				<view class="flex-none form-label">验证码</view>
-				<input name='authCode' maxlength="4" type="number" class='flex-auto' placeholder="请输入验证码" />
-				<button disabled="{{disabledBtn}}" class="flex-none auth-code-btn" type="primary" plain="true" bindtap="getAuthCode" size="mini">{{ smsText }}</button>
-			</view>
-			<button type="primary" class="form-submit" form-type='submit'>立即查询</button>
-		</form>
-	</view>
+  <image src='../../assets/images/login_bg.png' mode="widthFix" />
+  <view class="form-wrapper">
+    <form bindsubmit='submit'>
+      <view class='flex flex-center form-item'>
+        <view class="flex-none form-label">手机号</view>
+        <input bindinput="bindNumInput" type="number" name='telephone' maxlength="11" class='flex-auto'
+          placeholder="请输入您的手机号码" />
+      </view>
+      <view class='flex flex-center form-item'>
+        <view class="flex-none form-label">验证码</view>
+        <input name='authCode' maxlength="4" type="number" class='flex-auto' placeholder="请输入验证码" />
+        <button disabled="{{disabledBtn}}" class="flex-none auth-code-btn" type="primary" plain="true"
+          bindtap="getAuthCode" size="mini">{{ smsText }}</button>
+      </view>
+      <button type="primary" class="form-submit" form-type='submit'>立即查询</button>
+    </form>
+  </view>
 </view>

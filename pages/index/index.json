@@ -1,5 +1,7 @@
 {
   "usingComponents": {
-    "YunMarquee": "/components/marquee/marquee"
+    "YunMarquee": "/components/marquee/marquee",
+    "YunPopup": "/components/popup/popup",
+    "YunForms": "/components/forms/forms"
   }
 }

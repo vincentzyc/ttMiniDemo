@@ -1,8 +1,16 @@
 import Api from '../../api/index'
 Page({
+  elForm: null,
   data: {
     pid: "25416",
-    cjData: null
+    cjData: null,
+  },
+  handleClick() {
+    this.elForm.openPopup()
+  },
+  refForm(ref) {
+    // 存储自定义组件实例，方便以后调用
+    this.elForm = ref;
   },
   goOrder() {
     // const url = 'https://card.liulianglf.cn/sim/index.html#/login'

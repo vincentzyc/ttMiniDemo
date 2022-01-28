@@ -1,4 +1,4 @@
-import AllCity from '../../assets/json/city.json';
+import AllCity from '../../assets/js/city';
 import ruleList from '../../assets/js/validate.js';
 import Api from '../../api/index'
 import StaticData from '../../assets/js/static-data.js'
@@ -168,16 +168,16 @@ Component({
       const params = this.formatParam(e.detail.value)
       const valiDateRes = this.valiDate(params);
       if (valiDateRes !== true) {
-        ks.pageScrollTo({ selector: '#YuiForms' })
-        return ks.showToast({ title: valiDateRes, icon: 'none' })
+        tt.pageScrollTo({ selector: '#YuiForms' })
+        return tt.showToast({ title: valiDateRes, icon: 'none' })
       }
-      ks.showLoading({ title: '正在提交', mask: true })
+      tt.showLoading({ title: '正在提交', mask: true })
       let res = await Api.Choujin.submitForm(params);
-      ks.hideLoading()
+      tt.hideLoading()
       if (res.responseCode === '0') {
-        ks.navigateTo({ url: '/pages/success/success' })
+        tt.navigateTo({ url: '/pages/success/success' })
       } else {
-        ks.showModal({
+        tt.showModal({
           showCancel: false,
           content: res.msg || '提交失败，请稍后重试'
         })
@@ -225,7 +225,7 @@ Component({
     async lockNumber(e) {
       const phoneIndex = e.currentTarget?.dataset?.phoneIndex
       const phoneItem = e.currentTarget?.dataset?.phoneItem
-      ks.showLoading({ title: '拼命抢号中...', mask: true })
+      tt.showLoading({ title: '拼命抢号中...', mask: true })
       const params = {
         handleNo: phoneItem.num,
         pid: this.data.cjData.pid,
@@ -233,11 +233,11 @@ Component({
         sysOrderId: this.data.cjData.pageId,
       }
       const res = await Api.Choujin.lockNumber(params)
-      ks.hideLoading()
+      tt.hideLoading()
       if (res?.code === '0') {
         this.handleSelect(phoneItem)
       } else {
-        ks.showToast({
+        tt.showToast({
           title: '您下手太慢了，该号码已被别的用户选取！',
           icon: 'none',
         })
@@ -258,8 +258,5 @@ Component({
       this.setData({ ipRegion: arr })
       this.setMultiArr(arr)
     }
-    ks.onKeyboardHeightChange(res => {
-      res.height > 0 ? this.setData({ showBottomBtn: false }) : this.setData({ showBottomBtn: true })
-    })
   }
 })

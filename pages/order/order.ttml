@@ -1,8 +1,8 @@
 <view class="wrapper page-wrapper">
 	<view class="form-wrapper">
 		<view class="order-sum">
-			<view ks:if="{{list.length>0}}">
-				<view class="order-item" ks:for="{{list}}">
+			<view tt:if="{{list.length>0}}">
+				<view class="order-item" tt:for="{{list}}">
 					<view class="order-title">您的订单&nbsp;&nbsp;{{ index + 1 }}</view>
 					<view class="messBox">
 						<view class="mess-com">
@@ -21,7 +21,7 @@
 					</view>
 				</view>
 			</view>
-			<view ks:else class="no-data">暂无数据</view>
+			<view tt:else class="no-data">暂无数据</view>
 		</view>
 	</view>
 </view>

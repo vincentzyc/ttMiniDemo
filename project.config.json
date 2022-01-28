@@ -20,6 +20,15 @@
                     "scene": "990001",
                     "launchFrom": "scan",
                     "location": "qr_code"
+                },
+                {
+                    "id": 1643334307333,
+                    "name": "成功页",
+                    "pathName": "pages/success/success",
+                    "query": "",
+                    "scene": "990001",
+                    "launchFrom": "scan",
+                    "location": "qr_code"
                 }
             ]
         }

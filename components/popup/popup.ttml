@@ -1,12 +1,9 @@
-<view class="yun-popup-wrapper" ks:if="{{show}}">
-    <view class="yun-popup-overlay"></view>
-    <view class="yun-popup-center">
-        <icon type="cancel" color="#fff" class="yun-popup-close-btn" bindtap="closePopup"></icon>
-        <view class="yun-popup-content">
-            <slot></slot>
-        </view>
+<view class="yun-popup-wrapper" tt:if="{{show}}">
+  <view class="yun-popup-overlay"></view>
+  <view class="yun-popup-center">
+    <icon type="cancel" color="#fff" class="yun-popup-close-btn" bindtap="closePopup"></icon>
+    <view class="yun-popup-content">
+      <slot></slot>
     </view>
+  </view>
 </view>
-    <!-- <YunPopup id="yun-popup">
-        <view style="width: 86vw;height: 50vh">客服电话：020-38468075</view>
-    </YunPopup> -->

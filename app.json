@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/order/order",
     "pages/login/login",
-    "pages/iframe/iframe"
+    "pages/iframe/iframe",
+    "pages/success/success"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,0 +1,21 @@
+.success-wrap {
+	padding-top: 100px;
+}
+.success-icon {
+	margin-bottom: 20px;
+}
+
+.success-text {
+	font-size: 16px;
+	line-height: 24px;
+	width: 70%;
+	color: #999;
+}
+
+.success-h2 {
+	color: #333;
+	font-size: 24px;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 20px;
+}
