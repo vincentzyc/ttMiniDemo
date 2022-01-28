@@ -39,16 +39,16 @@ Page({
     };
     const valiDateRes = this.valiDate(params);
     if (valiDateRes !== true) {
-      return ks.showToast({ title: valiDateRes, icon: 'none' })
+      return tt.showToast({ title: valiDateRes, icon: 'none' })
     }
     Api.Choujin.authCode(params)
     this.smsCount(60)
     // 用户体验优化，直接倒计时，不等结果
-    // const res = await Api.Choujin.authCode(params)Z
+    // const res = await Api.Choujin.authCode(params)
     // if (res.responseCode === '0000') {
     //   this.smsCount(60);
     // } else {
-    //   ks.showToast({ title: res.message, icon: 'none' })
+    //   tt.showToast({ title: res.message, icon: 'none' })
     // }
   },
   valiDate(obj) {
@@ -67,15 +67,15 @@ Page({
     const params = e.detail.value
     const valiDateRes = this.valiDate(params);
     if (valiDateRes !== true) {
-      return ks.showToast({ title: valiDateRes, icon: 'none' })
+      return tt.showToast({ title: valiDateRes, icon: 'none' })
     }
-    ks.showLoading({ title: '正在登录', mask: true })
+    tt.showLoading({ title: '正在登录', mask: true })
     const res = await Api.Choujin.verifyAuthCode(params)
-    ks.hideLoading()
+    tt.hideLoading()
     if (res.responseCode === '0000') {
-      ks.navigateTo({ url: '/pages/order/order?phone=' + params.telephone })
+      tt.navigateTo({ url: '/pages/order/order?phone=' + params.telephone })
     } else {
-      ks.showToast({ title: res.result || '网络繁忙，请稍后重试', icon: 'none' })
+      tt.showToast({ title: res.result || '网络繁忙，请稍后重试', icon: 'none' })
     }
   }
 });

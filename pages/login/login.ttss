@@ -34,4 +34,5 @@
 }
 .auth-code-btn {
 	font-size: 24rpx;
+	background-image: linear-gradient(to right, #ff951f, #ff6f04);
 }
