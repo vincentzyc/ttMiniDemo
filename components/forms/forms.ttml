@@ -46,7 +46,7 @@
     </view>
     <view class="agr-wrap flex flex-center">
       <!-- <checkbox-group name='checkbox'> -->
-        <checkbox value="checkbox1" checked color="#fff" />
+        <checkbox value="checkbox1" checked="true" />
       <!-- </checkbox-group> -->
       <view>
         <span>提交即视为阅读并同意</span>
