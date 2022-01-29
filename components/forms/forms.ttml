@@ -45,9 +45,9 @@
       <button class="form-submit" form-type="submit" type="primary">0元领取</button>
     </view>
     <view class="agr-wrap flex flex-center">
-      <checkbox-group name='checkbox'>
+      <!-- <checkbox-group name='checkbox'> -->
         <checkbox value="checkbox1" checked color="#fff" />
-      </checkbox-group>
+      <!-- </checkbox-group> -->
       <view>
         <span>提交即视为阅读并同意</span>
         <span class="c999" bindtap="toggleAgr1">
