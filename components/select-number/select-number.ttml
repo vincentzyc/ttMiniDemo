@@ -1,5 +1,5 @@
-<view class="forms-wrap">
-  <view class="input-wrap" bindtap="toggleNumPicker">
+<view class="select-number-wrap">
+  <!-- <view class="input-wrap" bindtap="toggleNumPicker">
     <view class="input-label">免费选号</view>
     <view class="flex align-middle input flex-auto">
       <view class="flex input-phone" tt:if="{{selectPhone}}">
@@ -9,35 +9,32 @@
       <view class="flex flex-auto input-placeholder" tt:else>请选择您的心仪号码</view>
     </view>
     <view class="input-label-icon"></view>
-  </view>
-  <view class="popup-commom-wrap" style="margin-top:7px">
-    <view class="numpicker-wrap">
-      <view class="row numpicker-top flex">
-        <icon type='search' size='16' class="numpicker-search-icon" />
-        <input type="number" class="numpicker-input flex-auto" placeholder="请输入幸运数字" maxlength="8"
-          bindinput='bindNumInput' />
-        <button class="numpicker-change flex-none" type="primary" size="mini" loading="{{loading}}"
-          bindtap="changeNumber">{{loading?"获取中":"换一批"}}</button>
-      </view>
-      <view class="numpicker-center">
-        <ul class="flex flex-wrap space-around" tt:if="{{phoneList.length>0}}">
-          <li class="phone-item" bindtap='lockNumber' data-phone-index="{{index}}" data-phone-item="{{phone}}"
-            tt:for="{{phoneList}}" tt:for-item="phone">
-            <div
-              class="{{['flex', 'flex-center', 'flex-column', 'phone-number',selectPhone===phone.num?'isactive':'']}}">
-              <p><span tt:for="{{phone.item}}" class="{{item.highlight?'active-char':''}}">{{item.numChar}}</span></p>
-            </div>
-          </li>
-          <li class="phone-item mg-b0"></li>
-          <li class="phone-item mg-b0"></li>
-          <li class="phone-item mg-b0"></li>
-        </ul>
-        <view tt:else class="flex flex-center flex-column">
-          <p>哎呦，没有适合您的号码！</p>
-          <small style="color:#ccc;margin: 5px 0 10px 0;">建议缩短号码字数，例如：88</small>
-        </view>
-      </view>
-      <button class="numpicker-confirm-btn" type="primary" bindtap="toggleNumPicker">确定</button>
+  </view> -->
+  <view class="numpicker-wrap">
+    <view class="row numpicker-top flex">
+      <icon type='search' size='16' class="numpicker-search-icon" />
+      <input type="number" class="numpicker-input flex-auto" placeholder="请输入幸运数字" maxlength="8"
+        bindinput='bindNumInput' />
+      <button class="numpicker-change flex-none" type="primary" size="mini" loading="{{loading}}"
+        bindtap="changeNumber">{{loading?"获取中":"换一批"}}</button>
     </view>
+    <view class="numpicker-center">
+      <ul class="flex flex-wrap space-around" tt:if="{{phoneList.length>0}}">
+        <li class="phone-item" bindtap='lockNumber' data-phone-index="{{index}}" data-phone-item="{{phone}}"
+          tt:for="{{phoneList}}" tt:for-item="phone">
+          <div class="{{['flex', 'flex-center', 'flex-column', 'phone-number',selectPhone===phone.num?'isactive':'']}}">
+            <p><span tt:for="{{phone.item}}" class="{{item.highlight?'active-char':''}}">{{item.numChar}}</span></p>
+          </div>
+        </li>
+        <li class="phone-item mg-b0"></li>
+        <li class="phone-item mg-b0"></li>
+        <li class="phone-item mg-b0"></li>
+      </ul>
+      <view tt:else class="flex flex-center flex-column">
+        <p>哎呦，没有适合您的号码！</p>
+        <small style="color:#ccc;margin: 5px 0 10px 0;">建议缩短号码字数，例如：88</small>
+      </view>
+    </view>
+    <button class="numpicker-confirm-btn" type="primary" bindtap="toggleNumPicker">确定</button>
   </view>
 </view>
