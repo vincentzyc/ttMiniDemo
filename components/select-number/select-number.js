@@ -1,7 +1,4 @@
-import AllCity from '../../assets/js/city';
-import ruleList from '../../assets/js/validate.js';
 import Api from '../../api/index'
-import StaticData from '../../assets/js/static-data.js'
 
 Component({
   properties: {
@@ -25,8 +22,6 @@ Component({
     selectNumItem: '',
     selectPhone: '',
     loading: false,
-    agrtext1: StaticData.agrtext1,
-    agrtext2: StaticData.agrtext2,
     timer: 0,
     showBottomBtn: true
   },
@@ -140,18 +135,6 @@ Component({
           break;
       }
     },
-    valiDate(obj) {
-      for (const key in obj) {
-        if (Object.hasOwnProperty.call(obj, key)) {
-          const element = obj[key];
-          if (ruleList[key]) {
-            const valiRes = ruleList[key](element)
-            if (valiRes !== true) return valiRes
-          }
-        }
-      }
-      return true
-    },
     formatParam(params) {
       if (Array.isArray(params.selectCity) && params.selectCity.length > 0) {
         const arrCity = this.getMultiText(params.selectCity)
@@ -163,34 +146,6 @@ Component({
       params.pid = this.data.cjData.pid
       params.handleNo = this.data.selectPhone
       return params
-    },
-    async submit(e) {
-      const params = this.formatParam(e.detail.value)
-      const valiDateRes = this.valiDate(params);
-      if (valiDateRes !== true) {
-        tt.pageScrollTo({ selector: '#YuiForms' })
-        return tt.showToast({ title: valiDateRes, icon: 'none' })
-      }
-      tt.showLoading({ title: '正在提交', mask: true })
-      let res = await Api.Choujin.submitForm(params);
-      tt.hideLoading()
-      if (res.responseCode === '0') {
-        tt.navigateTo({ url: '/pages/success/success' })
-      } else {
-        tt.showModal({
-          showCancel: false,
-          content: res.msg || '提交失败，请稍后重试'
-        })
-        this.triggerEvent('refreshPageId', {}, {})
-      }
-    },
-    toggleAgr1() {
-      const elYunPopup = this.selectComponent('#yun-popup1')
-      elYunPopup.data.show ? elYunPopup.closePopup() : elYunPopup.openPopup()
-    },
-    toggleAgr2() {
-      const elYunPopup = this.selectComponent('#yun-popup2')
-      elYunPopup.data.show ? elYunPopup.closePopup() : elYunPopup.openPopup()
     },
     getNumber() {
       this.setData({ loading: true })
@@ -247,7 +202,6 @@ Component({
     },
   },
   async ready() {
-    this.setData({ cityInfo: AllCity })
     const res = await Api.Choujin.getIpRegion({})
     if (res.data) {
       const ctInfo = res.data || {}
