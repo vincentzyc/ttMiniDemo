@@ -22,17 +22,17 @@
       <ul class="flex flex-wrap space-around" tt:if="{{phoneList.length>0}}">
         <li class="phone-item" bindtap='lockNumber' data-phone-index="{{index}}" data-phone-item="{{phone}}"
           tt:for="{{phoneList}}" tt:for-item="phone">
-          <div class="{{['flex', 'flex-center', 'flex-column', 'phone-number',selectPhone===phone.num?'isactive':'']}}">
-            <p><span tt:for="{{phone.item}}" class="{{item.highlight?'active-char':''}}">{{item.numChar}}</span></p>
-          </div>
+          <view class="{{['flex', 'flex-center', 'flex-column', 'phone-number',selectPhone===phone.num?'isactive':'']}}">
+            <view><span tt:for="{{phone.item}}" class="{{item.highlight?'active-char':''}}">{{item.numChar}}</span></view>
+          </view>
         </li>
         <li class="phone-item mg-b0"></li>
         <li class="phone-item mg-b0"></li>
         <li class="phone-item mg-b0"></li>
       </ul>
       <view tt:else class="flex flex-center flex-column">
-        <p>哎呦，没有适合您的号码！</p>
-        <small style="color:#ccc;margin: 5px 0 10px 0;">建议缩短号码字数，例如：88</small>
+        <view>哎呦，没有适合您的号码！</view>
+        <view style="color:#ccc;margin: 5px 0 10px 0;">建议缩短号码字数，例如：88</view>
       </view>
     </view>
     <button class="numpicker-confirm-btn" type="primary" bindtap="toggleNumPicker">确定</button>
