@@ -1,4 +1,4 @@
-.select-number-wra {
+.select-number-wrap {
 	display: flex;
 	background-color: #ffffff;
 	padding: 10rpx 20rpx;
@@ -61,36 +61,6 @@
 	line-height: 2.2;
 	letter-spacing: 5rpx;
 	font-size: 50rpx;
-}
-
-.agr-wrap {
-	font-size: 12px;
-	margin-top: 10px;
-	color: #ccc;
-	line-height: 1.6;
-}
-
-.ks-switch--checkbox {
-	-webkit-appearance: none;
-	outline: 0;
-	margin: 0;
-	margin-right: 5px;
-	border: 1px solid #d1d1d1;
-	background-color: #ccc;
-	border-radius: 3px;
-	width: 14px;
-	height: 14px;
-	position: relative;
-	vertical-align: text-top;
-}
-
-.ks-switch--checkbox-container {
-	vertical-align: text-bottom
-}
-
-.ks-switch--checkbox[checked]::before,
-.ks-switch--checkbox:checked::before {
-	font-size: 14px;
 }
 
 .popup-commom-wrap {
