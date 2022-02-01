@@ -2,6 +2,7 @@
   "usingComponents": {
     "YunMarquee": "/components/marquee/marquee",
     "YunPopup": "/components/popup/popup",
-    "YunForms": "/components/forms/forms"
+    "YunForms": "/components/forms/forms",
+    "YunSelectNumber": "/components/select-number/select-number"
   }
 }
