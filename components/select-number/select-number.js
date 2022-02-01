@@ -11,7 +11,6 @@ Component({
     hadCityInfo: false,
     cityInfo: [],
     ipRegion: [],
-    region: [],
     searchNum: '',
     phoneList: [],
     selectNumItem: '',
