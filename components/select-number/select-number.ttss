@@ -87,8 +87,6 @@
 	border-radius: 40px;
 }
 .numpicker-change {
-	padding: 0 15px !important;
-	border-radius: 30px;
 	height: 100%;
 }
 .numpicker-center {
