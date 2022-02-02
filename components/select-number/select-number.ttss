@@ -1,6 +1,5 @@
 .select-number-wrap {
 	display: flex;
-	background-color: #ffffff;
 	padding: 10rpx 20rpx;
 }
 
