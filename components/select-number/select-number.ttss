@@ -46,22 +46,6 @@
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
-.input-placeholder {
-	color: #aaa;
-}
-.input-phone {
-	font-size: 16px;
-}
-
-.form-submit {
-	margin-top: 20rpx;
-	background-image: linear-gradient(to bottom, #ffd272, #ff6706);
-	font-weight: bold;
-	line-height: 2.2;
-	letter-spacing: 5rpx;
-	font-size: 50rpx;
-}
-
 .numpicker-top {
 	height: 40px;
 }
