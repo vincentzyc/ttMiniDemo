@@ -22,9 +22,6 @@
 	margin-top: 10px;
 	border-radius: 40px;
 }
-.numpicker-change {
-	height: 100%;
-}
 .numpicker-center {
 	margin-top: 15px;
 }
