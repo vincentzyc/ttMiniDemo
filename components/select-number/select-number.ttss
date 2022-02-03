@@ -15,7 +15,7 @@
 }
 .numpicker-search-icon {
 	position: absolute;
-	top: 12px;
+	top: 14px;
 	left: 10px;
 }
 .numpicker-confirm-btn {
