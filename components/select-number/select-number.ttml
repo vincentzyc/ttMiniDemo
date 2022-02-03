@@ -1,10 +1,10 @@
 <view class="select-number-wrap">
-  <view class="numpicker-wrap">
+  <view class="numpicker-wrap widthfull">
     <view class="row numpicker-top flex">
       <icon type='search' size='16' class="numpicker-search-icon" />
       <input type="number" class="numpicker-input flex-auto" placeholder="请输入幸运数字" maxlength="8"
         bindinput='bindNumInput' />
-      <button class="numpicker-change flex-none" type="primary" size="mini" loading="{{loading}}"
+      <button class="numpicker-change flex align-middle flex-none" type="primary" size="mini" loading="{{loading}}"
         bindtap="changeNumber">{{loading?"获取中":"换一批"}}</button>
     </view>
     <view class="numpicker-center">
