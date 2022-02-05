@@ -6,7 +6,7 @@
     </view>
     <image class="image" src="../../assets/images/1.jpg" mode="widthFix" />
     <button bindtap="handleClick">open popup</button>
-    <YunSelectNumber />
+    <YunSelectNumber cjData="{{cjData}}"/>
     <YunPopup id="yun-forms" tt:ref="refForm">
       <view class="popup-commom-wrap c666">
         <YunForms class="row" cjData="{{cjData}}" id="YuiForms" bindrefreshPageId="onRefreshPageId" />

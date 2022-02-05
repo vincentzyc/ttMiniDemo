@@ -26,6 +26,6 @@
         <view style="color:#ccc;margin: 5px 0 10px 0;">建议缩短号码字数，例如：88</view>
       </view>
     </view>
-    <button class="numpicker-confirm-btn" type="primary" bindtap="toggleNumPicker">确定</button>
+    <!-- <button class="numpicker-confirm-btn" type="primary" bindtap="toggleNumPicker">确定</button> -->
   </view>
 </view>
