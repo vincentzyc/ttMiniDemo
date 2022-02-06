@@ -1,8 +1,10 @@
 .select-number-wrap {
 	display: flex;
-	padding: 10rpx 20rpx;
 }
-
+.numpicker-search {
+	background-color: #fff;
+  padding: 20rpx;
+}
 .numpicker-top {
 	height: 40px;
 }
