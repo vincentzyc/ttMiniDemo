@@ -1,7 +1,7 @@
 <view class="select-number-wrap">
   <view class="numpicker-wrap widthfull">
     <view class="row numpicker-search">
-      <view class="row numpicker-top flex">
+      <view class="row numpicker-input-wrap flex">
         <icon type='search' size='16' class="numpicker-search-icon" />
         <input type="number" class="numpicker-input flex-auto" placeholder="请输入幸运数字" maxlength="8"
           bindinput='bindNumInput' />

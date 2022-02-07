@@ -1,19 +1,29 @@
 .select-number-wrap {
-	display: flex;
+	font-size: 28rpx;
 }
 .numpicker-search {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	background-color: #fff;
-  padding: 20rpx;
+	padding: 20rpx 0;
 }
-.numpicker-top {
-	height: 40px;
+.numpicker-input-wrap {
+	position: relative;
+	height: 80rpx;
+	width: 96%;
 }
 .numpicker-input {
-	border: 1px solid #ddd;
-	border-radius: 20px;
-	padding: 0 10px 0 30px;
-	margin-right: 10px;
+	border: 1px solid #ffd978;
+	border-radius: 20rpx;
+	padding: 0 0 0 60rpx;
 	height: 100%;
+}
+.numpicker-change {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
 }
 .numpicker-search-icon {
 	position: absolute;
