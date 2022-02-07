@@ -23,7 +23,15 @@
 	position: absolute;
 	top: 0;
 	right: 0;
-	bottom: 0;
+	bottom: -1px;
+	border-radius: 20rpx;
+	color: #333;
+	font-size: 36rpx;
+	font-weight: bold;
+	background-image: linear-gradient(to right, #f1e5bb, #ffdb85)
+}
+.numpicker-change::after {
+	display: none;
 }
 .numpicker-search-icon {
 	position: absolute;
