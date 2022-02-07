@@ -16,7 +16,8 @@
           tt:for="{{phoneList}}" tt:for-item="phone">
           <view
             class="{{['flex', 'flex-center', 'flex-column', 'phone-number',selectPhone===phone.num?'isactive':'']}}">
-            <view><span tt:for="{{phone.item}}" class="{{item.highlight?'active-char':''}}">{{item.numChar}}</span>
+            <view>
+              <span tt:for="{{phone.item}}" class="{{item.highlight?'active-char':''}}">{{item.numChar}}</span>
             </view>
           </view>
         </li>
