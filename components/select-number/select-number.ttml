@@ -11,42 +11,62 @@
         </view>
       </view>
 
-      <view class="flex hot-wrap">
-        <view class="flex-none hot-search" style="color: rgb(0, 0, 0); font-size: 28rpx">热搜：</view>
+      <view class="flex hot-wrap align-middle">
+        <view class="flex-none hot-search">热搜：</view>
         <view class="flex flex-wrap">
-          <view class="hot-tag">
-            66</view>
-          <view class="hot-tag">
-            88</view>
-          <view class="hot-tag">
-            520</view>
-          <view class="hot-tag">
-            521</view>
-          <view class="hot-tag">
-            1314</view>
+          <view class="hot-tag">66</view>
+          <view class="hot-tag">88</view>
+          <view class="hot-tag">520</view>
+          <view class="hot-tag">521</view>
+          <view class="hot-tag">1314</view>
+        </view>
+      </view>
+
+      <view class="number-rule">
+        <view class="flex flex-wrap space-between">
+          <view class="rule-item">全部</view>
+          <view class="rule-item">AAA+</view>
+          <view class="rule-item">ABCBA</view>
+          <view class="rule-item">AABA</view>
+          <view class="rule-item">ABAA</view>
+          <view class="rule-item">AABB</view>
+          <view class="rule-item">ABAB</view>
+          <view class="rule-item">AA&BB</view>
         </view>
       </view>
     </view>
 
     <view class="numpicker-center">
-      <ul class="flex flex-wrap space-around" tt:if="{{phoneList.length>0}}">
-        <li class="phone-item" bindtap='lockNumber' data-phone-index="{{index}}" data-phone-item="{{phone}}"
+      <view class="flex flex-wrap space-around" tt:if="{{phoneList.length>0}}">
+        <view class="phone-item" bindtap='lockNumber' data-phone-index="{{index}}" data-phone-item="{{phone}}"
           tt:for="{{phoneList}}" tt:for-item="phone">
-          <view
-            class="{{['flex', 'flex-center', 'flex-column', 'phone-number',selectPhone===phone.num?'isactive':'']}}">
-            <view>
-              <view tt:for="{{phone.item}}" class="{{item.highlight?'active-char':''}}">{{item.numChar}}</view>
+          <view class="flex flex-center flex-column phone-number">
+            <view class="flex flex-center phone-item-char">
+              <view tt:for="{{phone.item}}" tt:for-item="num"
+                style="color:{{num.highlight==='1'?'#fd3134':num.highlight==='2'?'#00b0f0':''}}">
+                {{num.numChar}}
+              </view>
+            </view>
+            <view class="flex align-middle space-around phone-info">
+              <view class="phone-price">{{ phone.showMoney }}元</view>
+              <view class="phone-text">{{ phone.showMsg }}</view>
             </view>
           </view>
-        </li>
-        <li class="phone-item mg-b0"></li>
-        <li class="phone-item mg-b0"></li>
-        <li class="phone-item mg-b0"></li>
-      </ul>
+        </view>
+        <view class="phone-item mg-b0"></view>
+        <view class="phone-item mg-b0"></view>
+        <view class="phone-item mg-b0"></view>
+      </view>
       <view tt:else class="flex flex-center flex-column">
         <view>哎呦，没有适合您的号码！</view>
         <view style="color:#ccc;margin: 5px 0 10px 0;">建议缩短号码字数，例如：88</view>
       </view>
+    </view>
+
+    <view class="flex" tt:if="{{showPNBtn}}">
+      <button class="{{numIndex===0?'change-button disabled':'change-button'}}" type="primary"
+        bindtap="getPrePage">上一页{{numIndex}}</button>
+      <button class="change-button" type="primary" bindtap="getNextPage" loading="{{nextLoading}}">下一页</button>
     </view>
     <!-- <button class="numpicker-confirm-btn" type="primary" bindtap="toggleNumPicker">确定</button> -->
   </view>
