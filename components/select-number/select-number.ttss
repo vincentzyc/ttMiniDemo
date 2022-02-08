@@ -4,6 +4,8 @@
 .numpicker-search {
 	background-color: #fff;
 	padding: 20rpx;
+	margin: 10rpx 20rpx;
+	border-radius: 20rpx;
 }
 .numpicker-input-wrap {
 	position: relative;
@@ -36,28 +38,85 @@
 	left: 10px;
 }
 .hot-wrap {
-	padding: 20rpx;
+	margin-top: 10rpx;
+	padding: 20rpx 0 16rpx 0;
+	font-size: 28rpx;
 }
-.numpicker-confirm-btn {
-	margin-top: 10px;
-	border-radius: 40px;
+.hot-tag {
+	background-color: #fff2de;
+	border: 2rpx solid #fddc93;
+	color: #ffbc52;
+	padding: 4rpx 16rpx;
+	border-radius: 12rpx;
+	margin-right: 10rpx;
+}
+.number-rule {
+	font-size: 28rpx;
+	line-height: 1;
+}
+.number-rule .rule-item {
+	text-align: center;
+	width: 24%;
+	padding: 24rpx 0;
+	border-radius: 40rpx;
+	margin-top: 10rpx;
+	-webkit-transition: 0.3s;
+	transition: 0.3s;
+	word-break: break-all;
+	color: #000;
+	border-color: rgb(251, 191, 82);
+	background-color: rgb(251, 191, 82);
+}
+.change-button {
+	background-color: #fbbf52;
+	color: #fff;
+	font-size: 36rpx;
+	border-radius: 40rpx;
+	padding: 0 60rpx;
+	line-height: 2.3
+}
+.change-button.disabled {
+	opacity: 0.5
+}
+.change-button::after {
+	display: none;
 }
 .numpicker-center {
+  padding: 0 10rpx;
 	margin-top: 15px;
 }
 .numpicker-center .phone-item {
 	margin-bottom: 10px;
-	width: 45%;
+	width: 46%;
 	position: relative;
 }
 .numpicker-center .phone-number {
 	position: relative;
-	font-size: 16px;
-	border: 2px solid #ebedf0;
-	border-radius: 10px;
-	line-height: 20px;
-	height: 40px;
+	font-size: 32rpx;
+	border-radius: 20rpx;
+	line-height: 40rpx;
+	height: 108rpx;
 	background-color: #fff;
+}
+.phone-item-char {
+	font-weight: bold;
+	font-size: 36rpx;
+	line-height: 60rpx;
+}
+.numpicker-center .phone-info {
+	font-size: 24rpx;
+	line-height: 36rpx;
+	width: 100%;
+	color: #999;
+}
+.numpicker-center .phone-price {
+	color: #6b605a;
+	text-decoration: line-through
+}
+.numpicker-center .phone-text {
+	font-size: 24rpx;
+	line-height: 36rpx;
+	color: #f15048;
 }
 .numpicker-center .isactive {
 	border-color: #f15048
