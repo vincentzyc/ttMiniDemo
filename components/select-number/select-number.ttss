@@ -2,16 +2,13 @@
 	font-size: 28rpx;
 }
 .numpicker-search {
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	background-color: #fff;
-	padding: 20rpx 0;
+	padding: 20rpx;
 }
 .numpicker-input-wrap {
 	position: relative;
 	height: 80rpx;
-	width: 96%;
+	width: 100%;
 }
 .numpicker-input {
 	border: 1px solid #ffd978;
@@ -37,6 +34,9 @@
 	position: absolute;
 	top: 14px;
 	left: 10px;
+}
+.hot-wrap {
+	padding: 20rpx;
 }
 .numpicker-confirm-btn {
 	margin-top: 10px;

@@ -1,12 +1,30 @@
 <view class="select-number-wrap">
   <view class="numpicker-wrap widthfull">
-    <view class="row numpicker-search">
-      <view class="row numpicker-input-wrap flex">
-        <icon type='search' size='16' class="numpicker-search-icon" />
-        <input type="number" class="numpicker-input flex-auto" placeholder="请输入幸运数字" maxlength="8"
-          bindinput='bindNumInput' />
-        <button class="numpicker-change flex align-middle flex-none" type="primary" size="mini" loading="{{loading}}"
-          bindtap="changeNumber">{{loading?"获取中":"搜索"}}</button>
+    <view class="numpicker-search">
+      <view class="flex flex-center">
+        <view class="numpicker-input-wrap flex">
+          <icon type='search' size='16' class="numpicker-search-icon" />
+          <input type="number" class="numpicker-input flex-auto" placeholder="请输入幸运数字" maxlength="8"
+            bindinput='bindNumInput' />
+          <button class="numpicker-change flex align-middle flex-none" type="primary" size="mini" loading="{{loading}}"
+            bindtap="changeNumber">搜索</button>
+        </view>
+      </view>
+
+      <view class="flex hot-wrap">
+        <view class="flex-none hot-search" style="color: rgb(0, 0, 0); font-size: 28rpx">热搜：</view>
+        <view class="flex flex-wrap">
+          <view class="hot-tag">
+            66</view>
+          <view class="hot-tag">
+            88</view>
+          <view class="hot-tag">
+            520</view>
+          <view class="hot-tag">
+            521</view>
+          <view class="hot-tag">
+            1314</view>
+        </view>
       </view>
     </view>
 
@@ -17,7 +35,7 @@
           <view
             class="{{['flex', 'flex-center', 'flex-column', 'phone-number',selectPhone===phone.num?'isactive':'']}}">
             <view>
-              <span tt:for="{{phone.item}}" class="{{item.highlight?'active-char':''}}">{{item.numChar}}</span>
+              <view tt:for="{{phone.item}}" class="{{item.highlight?'active-char':''}}">{{item.numChar}}</view>
             </view>
           </view>
         </li>
