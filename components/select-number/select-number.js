@@ -78,7 +78,7 @@ Component({
     },
     initAllNum(resNum) {
       allNums = Array.isArray(resNum) ? resNum : []
-      this.data.numIndex = 0
+      this.setData({ numIndex: 0 })
       this.setPhoneList()
     },
     setPhoneList() {
