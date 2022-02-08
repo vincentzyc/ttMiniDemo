@@ -64,8 +64,8 @@
     </view>
 
     <view class="flex" tt:if="{{showPNBtn}}">
-      <button class="{{numIndex===0?'change-button disabled':'change-button'}}" type="primary"
-        bindtap="getPrePage">上一页{{numIndex}}</button>
+      <button class="{{numIndex===0?'change-button disabled':'change-button'}}" type="primary" bindtap="getPrePage"
+        disabled="{{numIndex===0}}">上一页{{numIndex}}</button>
       <button class="change-button" type="primary" bindtap="getNextPage" loading="{{nextLoading}}">下一页</button>
     </view>
     <!-- <button class="numpicker-confirm-btn" type="primary" bindtap="toggleNumPicker">确定</button> -->
