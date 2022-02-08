@@ -1,10 +1,16 @@
 import Api from '../../api/index'
 
+let allNums = []
+
 Component({
   properties: {
     cjData: {
-      optionalTypes: ['Object', 'Null'],
-      value: null
+      type: Object | null,
+      value: null,
+      observer() {
+        // newVal 是属性更新后的新值，oldVal 是更新前的旧值
+        this.getNumber()
+      }
     }
   },
   data: {
@@ -16,17 +22,11 @@ Component({
     selectNumItem: '',
     selectPhone: '',
     loading: false,
+    showPNBtn: true,
+    nextLoading: false,
     timer: 0,
-    showBottomBtn: true
-  },
-  observers: {
-    'cjData.productCode': function (productCode) {
-      if (this.data.hadCityInfo) return
-      if (productCode) {
-        this.getNumber()
-        this.getCityInfo(productCode)
-      }
-    }
+    numIndex: 0,
+    numSize: 20
   },
   methods: {
     bindNumInput(e) {
@@ -53,37 +53,79 @@ Component({
     },
     getNumber() {
       this.setData({ loading: true })
-      this.getHandleNoItem().then(res => {
-        this.setData({ phoneList: res || [], selectNumItem: res[0] || '', selectPhone: res[0]?.num || '' })
+      this.getPrettyMixItem().then(res => {
+        this.setData({ phoneList: res.slice(0, this.data.numSize) || [] })
       }).finally(() => {
         this.setData({ loading: false })
       })
     },
-    async getHandleNoItem() {
+    async getPrettyMixItem() {
       const param = {
         pid: this.data.cjData.pid,
         searchNum: this.data.searchNum,
         productCode: this.data.cjData.productCode,
         sysOrderId: this.data.cjData.pageId,
+        city: "广州市",
+        prettyType: "ALL1",
+        province: "广东省"
       }
-      let res = await Api.Choujin.getHandleNoItem(param);
+      let res = await Api.Choujin.getPrettyMixItem(param);
       if (res.code === '0000' && Array.isArray(res.data?.numItem)) {
-        return res.data.numItem.slice(0, 8)
+        allNums = res.data.numItem.map(v => ({ ...v, isLock: false }))
+        return allNums
       }
       return []
+    },
+    initAllNum(resNum) {
+      allNums = Array.isArray(resNum) ? resNum : []
+      this.data.numIndex = 0
+      this.setPhoneList()
+    },
+    setPhoneList() {
+      if (allNums.length === 0) {
+        this.data.showPNBtn = false
+        return this.setData({ phoneList: [], showPNBtn: false })
+      } else {
+        this.setData({ showPNBtn: true })
+      }
+      const startIndex = this.data.numIndex * this.data.numSize
+      const endIndex = this.data.numIndex * this.data.numSize + this.data.numSize
+      const pagePhoneList = allNums.slice(startIndex, endIndex);
+      if (Array.isArray(pagePhoneList) && pagePhoneList.length === 0) {
+        this.setData({ nextLoading: true })
+        return this.changeNumber(true)
+      }
+      this.setData({ phoneList: pagePhoneList.filter(v => !v.isLock) })
+    },
+    getPrePage() {
+      // 上一页
+      this.setData({ numIndex: this.data.numIndex - 1 })
+      this.setPhoneList()
+    },
+    getNextPage() {
+      // 下一页
+      this.setData({ numIndex: this.data.numIndex + 1 })
+      this.setPhoneList()
     },
     changeNumber() {
       if (this.data.loading) return;
       this.setData({ loading: true })
-      this.getHandleNoItem().then(res => {
-        this.setData({ phoneList: res || [], selectNumItem: res[0] || '', selectPhone: res[0]?.num || '' })
+      this.getPrettyMixItem().then(res => {
+        this.initAllNum(res)
       }).finally(() => {
-        this.setData({ loading: false })
+        this.setData({ loading: false, nextLoading: false })
       })
     },
     async lockNumber(e) {
+      console.log(e);
       const phoneIndex = e.currentTarget?.dataset?.phoneIndex
       const phoneItem = e.currentTarget?.dataset?.phoneItem
+
+      // this.data.phoneList.splice(phoneIndex, 1)
+      // allNums[numSize * this.data.numIndex + phoneIndex].isLock = true
+
+      // this.setData({ phoneList: this.data.phoneList })
+
       tt.showLoading({ title: '拼命抢号中...', mask: true })
       const params = {
         handleNo: phoneItem.num,
