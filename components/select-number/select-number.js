@@ -19,6 +19,20 @@ Component({
     ipRegion: [],
     searchNum: '',
     phoneList: [],
+    tagItems: ['66', '88', '520', '521', '1314'],
+    selectRule: '全部',
+    ruleItems: [
+      { label: '全部', value: '全部' },
+      { label: 'AABA', value: 'AABA' },
+      { label: 'AAAAA', value: 'AAAAA' },
+      { label: 'AAA+', value: 'AAA+' },
+      { label: 'AACBA', value: 'AACBA' },
+      { label: 'AABB', value: 'AABB' },
+      { label: 'ABCD', value: 'ABCD' },
+      { label: 'AA&BB', value: 'AA&BB' },
+      { label: 'ABAA', value: 'ABAA' },
+      { label: 'ABAB', value: 'ABAB' },
+    ],
     selectNumItem: '',
     selectPhone: '',
     loading: false,
@@ -29,13 +43,30 @@ Component({
     numSize: 20
   },
   methods: {
+    showLoading() {
+      clearTimeout(this.data.timer)
+      this.data.timer = setTimeout(() => {
+        tt.showLoading({ title: "号码获取中..." });
+      }, 300);
+    },
+    hideLoading() {
+      clearTimeout(this.data.timer)
+      tt.hideLoading()
+    },
+    handleHotSearch(e) {
+      const tag = e.currentTarget?.dataset?.tag
+      this.setData({ searchNum: tag, selectRule: '全部' })
+      this.getNumber()
+    },
+    handleSelectRule(e) {
+      const rule = e.currentTarget?.dataset?.rule
+      this.setData({ searchNum: '', selectRule: rule })
+      this.showLoading()
+      this.getNumber()
+    },
     bindNumInput(e) {
       const iptVal = e.detail.value;
       this.setData({ searchNum: iptVal })
-      clearTimeout(this.data.timer)
-      this.data.timer = setTimeout(() => {
-        this.getNumber()
-      }, 300);
     },
     handleSelect(phoneItem) {
       this.setData({
@@ -51,22 +82,14 @@ Component({
         this.setMultiArr(this.data.ipRegion)
       }
     },
-    getNumber() {
-      this.setData({ loading: true })
-      this.getPrettyMixItem().then(res => {
-        this.setData({ phoneList: res.slice(0, this.data.numSize) || [] })
-      }).finally(() => {
-        this.setData({ loading: false })
-      })
-    },
     async getPrettyMixItem() {
       const param = {
         pid: this.data.cjData.pid,
         searchNum: this.data.searchNum,
         productCode: this.data.cjData.productCode,
         sysOrderId: this.data.cjData.pageId,
+        prettyType: this.data.selectRule,
         city: "广州市",
-        prettyType: "ALL1",
         province: "广东省"
       }
       let res = await Api.Choujin.getPrettyMixItem(param);
@@ -81,6 +104,7 @@ Component({
       this.setData({ numIndex: 0 })
       this.setPhoneList()
     },
+    // 选择号码
     setPhoneList() {
       if (allNums.length === 0) {
         this.data.showPNBtn = false
@@ -93,29 +117,39 @@ Component({
       const pagePhoneList = allNums.slice(startIndex, endIndex);
       if (Array.isArray(pagePhoneList) && pagePhoneList.length === 0) {
         this.setData({ nextLoading: true })
-        return this.changeNumber(true)
+        return this.getNumber()
       }
       this.setData({ phoneList: pagePhoneList.filter(v => !v.isLock) })
     },
+    // 上一页
     getPrePage() {
-      // 上一页
       this.setData({ numIndex: this.data.numIndex - 1 })
       this.setPhoneList()
     },
+    // 下一页
     getNextPage() {
-      // 下一页
       this.setData({ numIndex: this.data.numIndex + 1 })
       this.setPhoneList()
     },
-    changeNumber() {
+    // 获取号码
+    getNumber() {
       if (this.data.loading) return;
       this.setData({ loading: true })
+      this.showLoading()
       this.getPrettyMixItem().then(res => {
         this.initAllNum(res)
       }).finally(() => {
         this.setData({ loading: false, nextLoading: false })
+        this.hideLoading()
       })
     },
+    // 搜索
+    changeNumber() {
+      if (this.data.loading) return;
+      this.setData({ selectRule: '全部' })
+      this.getNumber()
+    },
+    // 锁号
     async lockNumber(e) {
       console.log(e);
       const phoneIndex = e.currentTarget?.dataset?.phoneIndex

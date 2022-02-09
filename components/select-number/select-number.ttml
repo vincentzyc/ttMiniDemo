@@ -5,7 +5,7 @@
         <view class="numpicker-input-wrap flex">
           <icon type='search' size='16' class="numpicker-search-icon" />
           <input type="number" class="numpicker-input flex-auto" placeholder="请输入幸运数字" maxlength="8"
-            bindinput='bindNumInput' />
+            bindinput='bindNumInput' value="{{searchNum}}" />
           <button class="numpicker-change flex align-middle flex-none" type="primary" size="mini" loading="{{loading}}"
             bindtap="changeNumber">搜索</button>
         </view>
@@ -14,24 +14,15 @@
       <view class="flex hot-wrap align-middle">
         <view class="flex-none hot-search">热搜：</view>
         <view class="flex flex-wrap">
-          <view class="hot-tag">66</view>
-          <view class="hot-tag">88</view>
-          <view class="hot-tag">520</view>
-          <view class="hot-tag">521</view>
-          <view class="hot-tag">1314</view>
+          <view class="hot-tag" tt:for="{{tagItems}}" data-tag="{{item}}" bindtap="handleHotSearch">{{item}}</view>
         </view>
       </view>
 
       <view class="number-rule">
         <view class="flex flex-wrap space-between">
-          <view class="rule-item">全部</view>
-          <view class="rule-item">AAA+</view>
-          <view class="rule-item">ABCBA</view>
-          <view class="rule-item">AABA</view>
-          <view class="rule-item">ABAA</view>
-          <view class="rule-item">AABB</view>
-          <view class="rule-item">ABAB</view>
-          <view class="rule-item">AA&BB</view>
+          <view class="{{selectRule===item.value?'rule-item isactive':'rule-item'}}" bindtap="handleSelectRule"
+            tt:for="{{ruleItems}}" data-rule="{{item.value}}">
+            {{item.label}}</view>
         </view>
       </view>
     </view>
@@ -65,9 +56,8 @@
 
     <view class="flex" tt:if="{{showPNBtn}}">
       <button class="{{numIndex===0?'change-button disabled':'change-button'}}" type="primary" bindtap="getPrePage"
-        disabled="{{numIndex===0}}">上一页{{numIndex}}</button>
+        disabled="{{numIndex===0}}">上一页</button>
       <button class="change-button" type="primary" bindtap="getNextPage" loading="{{nextLoading}}">下一页</button>
     </view>
-    <!-- <button class="numpicker-confirm-btn" type="primary" bindtap="toggleNumPicker">确定</button> -->
   </view>
 </view>

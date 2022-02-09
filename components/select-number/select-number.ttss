@@ -15,7 +15,7 @@
 .numpicker-input {
 	border: 1px solid #ffd978;
 	border-radius: 20rpx;
-	padding: 0 0 0 60rpx;
+	padding: 0 170rpx 0 60rpx;
 	height: 100%;
 }
 .numpicker-change {
@@ -56,7 +56,7 @@
 }
 .number-rule .rule-item {
 	text-align: center;
-	width: 24%;
+	width: 19%;
 	padding: 24rpx 0;
 	border-radius: 40rpx;
 	margin-top: 10rpx;
@@ -66,6 +66,12 @@
 	color: #000;
 	border-color: rgb(251, 191, 82);
 	background-color: rgb(251, 191, 82);
+}
+
+.rule-item.isactive {
+	color: rgb(255, 255, 255);
+	border-color: rgb(251, 191, 82);
+	background-color: rgb(253, 191, 82);
 }
 .change-button {
 	background-color: #fbbf52;
@@ -82,7 +88,7 @@
 	display: none;
 }
 .numpicker-center {
-  padding: 0 10rpx;
+	padding: 0 10rpx;
 	margin-top: 15px;
 }
 .numpicker-center .phone-item {
