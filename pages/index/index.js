@@ -35,7 +35,6 @@ Page({
   async getPageId() {
     const params = { pid: this.data.pid }
     let res = await Api.Choujin.getPageId(params);
-    console.log(res);
     if (res) {
       res.pid = this.data.pid
       this.setData({ cjData: res });
