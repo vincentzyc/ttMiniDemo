@@ -1,6 +1,24 @@
 <view class="select-number-wrap">
   <view class="numpicker-wrap widthfull">
     <view class="numpicker-search">
+
+      <view class="flex widthfull">
+        <picker mode="multiSelector" bindcolumnchange="pickerColumnMulti" bindcancel="pickerCancel" bindchange="pickerConfirm" value="{{multiIndex}}" range="{{multiArr}}"
+          class="widthfull">
+          <view class="flex flex-center numpicker-city-input">
+            <view class="flex-none">归属地(可选择)</view>
+            <view class="input-tip-icon"></view>
+            <view class="flex-auto">
+              <view tt:if="{{multiStr.length > 0}}">{{multiStr}}</view>
+              <view class="input-placeholder" tt:else>
+                请选择归属地
+              </view>
+            </view>
+            <view class="input-label-icon flex-none"></view>
+          </view>
+        </picker>
+      </view>
+
       <view class="flex flex-center">
         <view class="numpicker-input-wrap flex">
           <icon type='search' size='16' class="numpicker-search-icon" />
