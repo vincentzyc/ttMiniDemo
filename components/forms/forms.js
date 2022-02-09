@@ -53,7 +53,7 @@ Component({
     },
     handleSelect(phoneItem) {
       this.setData({
-        selectPhone: phoneItem?.num || '',
+        selectPhone: phoneItem ? phoneItem.num : '',
         selectNumItem: phoneItem || ''
       })
     },
@@ -118,8 +118,8 @@ Component({
         })
       } else {
         const provinces = cityInfo.map(v => v.cityName) || []
-        const citys = cityInfo[0].cityInfo?.map(v => v.cityName) || []
-        const areas = cityInfo[0].cityInfo[0]?.cityInfo?.map(v => v.cityName) || []
+        const citys = cityInfo[0].cityInfo ? cityInfo[0].cityInfo.map(v => v.cityName) : []
+        const areas = cityInfo[0].cityInfo[0] ? cityInfo[0].cityInfo[0].cityInfo.map(v => v.cityName) : []
         this.setData({
           multiArr: [provinces, citys, areas],
           multiIndex: [0, 0, 0],
@@ -195,7 +195,7 @@ Component({
     getNumber() {
       this.setData({ loading: true })
       this.getHandleNoItem().then(res => {
-        this.setData({ phoneList: res || [], selectNumItem: res[0] || '', selectPhone: res[0]?.num || '' })
+        this.setData({ phoneList: res || [], selectNumItem: res[0] || '', selectPhone: res[0].num || '' })
       }).finally(() => {
         this.setData({ loading: false })
       })
@@ -208,7 +208,7 @@ Component({
         sysOrderId: this.data.cjData.pageId,
       }
       let res = await Api.Choujin.getHandleNoItem(param);
-      if (res.code === '0000' && Array.isArray(res.data?.numItem)) {
+      if (res.code === '0000' && Array.isArray(res.data.numItem)) {
         return res.data.numItem.slice(0, 8)
       }
       return []
@@ -217,14 +217,14 @@ Component({
       if (this.data.loading) return;
       this.setData({ loading: true })
       this.getHandleNoItem().then(res => {
-        this.setData({ phoneList: res || [], selectNumItem: res[0] || '', selectPhone: res[0]?.num || '' })
+        this.setData({ phoneList: res || [], selectNumItem: res[0] || '', selectPhone: res[0].num || '' })
       }).finally(() => {
         this.setData({ loading: false })
       })
     },
     async lockNumber(e) {
-      const phoneIndex = e.currentTarget?.dataset?.phoneIndex
-      const phoneItem = e.currentTarget?.dataset?.phoneItem
+      const phoneIndex = e.currentTarget.dataset.phoneIndex
+      const phoneItem = e.currentTarget.dataset.phoneItem
       tt.showLoading({ title: '拼命抢号中...', mask: true })
       const params = {
         handleNo: phoneItem.num,
@@ -234,7 +234,7 @@ Component({
       }
       const res = await Api.Choujin.lockNumber(params)
       tt.hideLoading()
-      if (res?.code === '0') {
+      if (res.code === '0') {
         this.handleSelect(phoneItem)
       } else {
         tt.showToast({
