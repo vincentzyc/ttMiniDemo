@@ -1,4 +1,5 @@
 import Api from '../../api/index'
+import AllCity from '../../assets/js/city';
 
 let allNums = []
 
@@ -9,13 +10,16 @@ Component({
       value: null,
       observer() {
         // newVal 是属性更新后的新值，oldVal 是更新前的旧值
-        this.getNumber()
+        this.initIpNumber()
       }
     }
   },
   data: {
-    hadCityInfo: false,
     cityInfo: [],
+    multiIndex: [0, 0, 0],
+    multiArr: [],
+    multiText: [],
+    multiStr: '',
     ipRegion: [],
     searchNum: '',
     phoneList: [],
@@ -74,23 +78,17 @@ Component({
         selectNumItem: phoneItem || ''
       })
     },
-    async getCityInfo(productCode) {
-      const res = await Api.Choujin.getCityInfo({ productCode: productCode })
-      if (res && res.length > 0) {
-        this.data.hadCityInfo = true
-        this.setData({ cityInfo: res })
-        this.setMultiArr(this.data.ipRegion)
-      }
-    },
     async getPrettyMixItem() {
       const param = {
         pid: this.data.cjData.pid,
         searchNum: this.data.searchNum,
         productCode: this.data.cjData.productCode,
         sysOrderId: this.data.cjData.pageId,
-        prettyType: this.data.selectRule,
-        city: "广州市",
-        province: "广东省"
+        prettyType: this.data.selectRule
+      }
+      if (Array.isArray(this.data.multiText) && this.data.multiText.length > 1) {
+        param.province = this.data.multiText[0]
+        param.city = this.data.multiText[1]
       }
       let res = await Api.Choujin.getPrettyMixItem(param);
       if (res.code === '0000' && Array.isArray(res.data?.numItem)) {
@@ -180,5 +178,111 @@ Component({
         this.setData({ phoneList: this.data.phoneList })
       }
     },
+    setMultiArr(defaultCity) {
+      if (this.data.cityInfo.length === 0) return
+      const cityInfo = this.data.cityInfo
+      if (Array.isArray(defaultCity) && defaultCity.length > 0) {
+        const province = defaultCity[0] ? defaultCity[0] : ''
+        const city = defaultCity[1] ? defaultCity[1] : ''
+        const area = defaultCity[2] ? defaultCity[2] : ''
+        let provinces = [], provinceIndex = 0, citys = [], cityIndex = 0, areas = [], areaIndex = 0
+        for (let index1 = 0; index1 < cityInfo.length; index1++) {
+          const element1 = cityInfo[index1];
+          provinces.push(element1.cityName)
+          if (element1.cityName === province) {
+            provinceIndex = index1
+          }
+        }
+        const provinceObj = cityInfo[provinceIndex];
+        for (let index2 = 0; index2 < provinceObj.cityInfo.length; index2++) {
+          const element2 = provinceObj.cityInfo[index2];
+          citys.push(element2.cityName)
+          if (element2.cityName === city) {
+            cityIndex = index2
+          }
+        }
+        const cityObj = provinceObj.cityInfo[cityIndex];
+        for (let index3 = 0; index3 < cityObj.cityInfo.length; index3++) {
+          const element3 = cityObj.cityInfo[index3];
+          areas.push(element3.cityName)
+          if (element3.cityName === area) {
+            areaIndex = index3
+          }
+        }
+        this.setData({
+          multiArr: [provinces, citys],
+          multiIndex: [provinceIndex, cityIndex],
+          multiText: [provinces[provinceIndex], citys[cityIndex]],
+          multiStr: [provinces[provinceIndex], citys[cityIndex]].join(' ')
+          // multiArr: [provinces, citys, areas],
+          // multiIndex: [provinceIndex, cityIndex, areaIndex],
+          // multiText: [provinces[provinceIndex], citys[cityIndex], areas[areaIndex]]
+        })
+      } else {
+        const provinces = cityInfo.map(v => v.cityName) || []
+        const citys = cityInfo[0].cityInfo?.map(v => v.cityName) || []
+        // const areas = cityInfo[0].cityInfo[0]?.cityInfo?.map(v => v.cityName) || []
+        this.setData({
+          multiArr: [provinces, citys],
+          multiIndex: [0, 0],
+          multiText: [provinces[0], citys[0]],
+          multiStr: [provinces[0], citys[0]].join(' ')
+          // multiArr: [provinces, citys, areas],
+          // multiIndex: [0, 0, 0],
+          // multiText: [provinces[0], citys[0], areas[0]]
+        })
+      }
+    },
+    getMultiText(multiIndex) {
+      if (Array.isArray(this.data.multiArr) && this.data.multiArr.length === 0) return []
+      const province = this.data.multiArr[0][multiIndex[0]]
+      const city = multiIndex[1] == 0 || multiIndex[1] ? this.data.multiArr[1][multiIndex[1]] : ''
+      // const area = multiIndex[2] == 0 || multiIndex[2] ? this.data.multiArr[2][multiIndex[2]] : ''
+      let multiText = []
+      if (province) multiText.push(province)
+      if (city) multiText.push(city)
+      // if (area) multiText.push(area)
+      return multiText
+    },
+    //取消选择归属地
+    pickerCancel() {
+      this.getNumber()
+    },
+    //确认选择归属地
+    pickerConfirm() {
+      console.log(123);
+      this.getNumber()
+    },
+    //改变归属地
+    pickerColumnMulti(e) {
+      switch (e.detail.column) {
+        case 0:
+          this.setMultiArr(this.getMultiText([e.detail.value]))
+          break;
+        case 1:
+          this.setMultiArr(this.getMultiText([this.data.multiIndex[0], e.detail.value]))
+          break;
+        // case 2:
+        //   this.setMultiArr(this.getMultiText([this.data.multiIndex[0], this.data.multiIndex[1], e.detail.value]))
+        //   break;
+      }
+    },
+    async initIpNumber() {
+      if (Array.isArray(this.data.ipRegion) && this.data.ipRegion.length > 0) return
+      const res = await Api.Choujin.getIpRegion({})
+      if (res.data) {
+        const ctInfo = res.data || {}
+        const arr = []
+        if (ctInfo.province) arr.push(ctInfo.province)
+        if (ctInfo.city) arr.push(ctInfo.city)
+        if (ctInfo.district) arr.push(ctInfo.district)
+        this.setData({ ipRegion: arr })
+        this.setMultiArr(arr)
+        this.getNumber()
+      }
+    }
+  },
+  async attached() {
+    this.setData({ cityInfo: AllCity })
   }
 })
