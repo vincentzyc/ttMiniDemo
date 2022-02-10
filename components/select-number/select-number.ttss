@@ -19,12 +19,12 @@
 	height: 100%;
 }
 .numpicker-city-input {
-  position: relative;
+	position: relative;
 	height: 80rpx;
 	border: 1px solid #ffd978;
 	border-radius: 20rpx;
-  padding: 0 20rpx;
-  margin-bottom: 20rpx;
+	padding: 0 20rpx;
+	margin-bottom: 20rpx;
 }
 .numpicker-change {
 	position: absolute;
@@ -132,8 +132,10 @@
 	line-height: 36rpx;
 	color: #f15048;
 }
-.numpicker-center .isactive {
-	border-color: #f15048
+.numpicker-center .phone-number.isactive {
+	background-color: rgb(255, 255, 255);
+	border-color: rgb(255, 0, 0);
+	box-shadow: rgb(255 0 0) 0px 0px 10px inset
 }
 .input-wrap .active-char, .numpicker-center .active-char {
 	color: #f15048

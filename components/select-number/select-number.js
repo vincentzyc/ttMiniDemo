@@ -58,12 +58,12 @@ Component({
       tt.hideLoading()
     },
     handleHotSearch(e) {
-      const tag = e.currentTarget?.dataset?.tag
+      const tag = e.currentTarget.dataset.tag
       this.setData({ searchNum: tag, selectRule: '全部' })
       this.getNumber()
     },
     handleSelectRule(e) {
-      const rule = e.currentTarget?.dataset?.rule
+      const rule = e.currentTarget.dataset.rule
       this.setData({ searchNum: '', selectRule: rule })
       this.showLoading()
       this.getNumber()
@@ -71,12 +71,6 @@ Component({
     bindNumInput(e) {
       const iptVal = e.detail.value;
       this.setData({ searchNum: iptVal })
-    },
-    handleSelect(phoneItem) {
-      this.setData({
-        selectPhone: phoneItem?.num || '',
-        selectNumItem: phoneItem || ''
-      })
     },
     async getPrettyMixItem() {
       const param = {
@@ -91,7 +85,7 @@ Component({
         param.city = this.data.multiText[1]
       }
       let res = await Api.Choujin.getPrettyMixItem(param);
-      if (res.code === '0000' && Array.isArray(res.data?.numItem)) {
+      if (res.code === '0000' && Array.isArray(res.data.numItem)) {
         allNums = res.data.numItem.map(v => ({ ...v, isLock: false }))
         return allNums
       }
@@ -147,11 +141,17 @@ Component({
       this.setData({ selectRule: '全部' })
       this.getNumber()
     },
+    handleSelect(phoneItem) {
+      this.setData({
+        selectPhone: phoneItem ? phoneItem.num : '',
+        selectNumItem: phoneItem || ''
+      })
+    },
     // 锁号
     async lockNumber(e) {
       console.log(e);
-      const phoneIndex = e.currentTarget?.dataset?.phoneIndex
-      const phoneItem = e.currentTarget?.dataset?.phoneItem
+      const phoneIndex = e.currentTarget.dataset.phoneIndex
+      const phoneItem = e.currentTarget.dataset.phoneItem
 
       // this.data.phoneList.splice(phoneIndex, 1)
       // allNums[numSize * this.data.numIndex + phoneIndex].isLock = true
@@ -167,7 +167,7 @@ Component({
       }
       const res = await Api.Choujin.lockNumber(params)
       tt.hideLoading()
-      if (res?.code === '0') {
+      if (res.code === '0') {
         this.handleSelect(phoneItem)
       } else {
         tt.showToast({
@@ -220,7 +220,7 @@ Component({
         })
       } else {
         const provinces = cityInfo.map(v => v.cityName) || []
-        const citys = cityInfo[0].cityInfo?.map(v => v.cityName) || []
+        const citys = cityInfo[0].cityInfo ? cityInfo[0].cityInfo.map(v => v.cityName) : []
         // const areas = cityInfo[0].cityInfo[0]?.cityInfo?.map(v => v.cityName) || []
         this.setData({
           multiArr: [provinces, citys],
@@ -244,15 +244,6 @@ Component({
       // if (area) multiText.push(area)
       return multiText
     },
-    //取消选择归属地
-    pickerCancel() {
-      this.getNumber()
-    },
-    //确认选择归属地
-    pickerConfirm() {
-      console.log(123);
-      this.getNumber()
-    },
     //改变归属地
     pickerColumnMulti(e) {
       switch (e.detail.column) {
@@ -266,6 +257,7 @@ Component({
         //   this.setMultiArr(this.getMultiText([this.data.multiIndex[0], this.data.multiIndex[1], e.detail.value]))
         //   break;
       }
+      this.getNumber()
     },
     async initIpNumber() {
       if (Array.isArray(this.data.ipRegion) && this.data.ipRegion.length > 0) return

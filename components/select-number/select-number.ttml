@@ -3,7 +3,7 @@
     <view class="numpicker-search">
 
       <view class="flex widthfull">
-        <picker mode="multiSelector" bindcolumnchange="pickerColumnMulti" bindcancel="pickerCancel" bindchange="pickerConfirm" value="{{multiIndex}}" range="{{multiArr}}"
+        <picker mode="multiSelector" bindcolumnchange="pickerColumnMulti" value="{{multiIndex}}" range="{{multiArr}}"
           class="widthfull">
           <view class="flex flex-center numpicker-city-input">
             <view class="flex-none">归属地(可选择)</view>
@@ -49,7 +49,7 @@
       <view class="flex flex-wrap space-around" tt:if="{{phoneList.length>0}}">
         <view class="phone-item" bindtap='lockNumber' data-phone-index="{{index}}" data-phone-item="{{phone}}"
           tt:for="{{phoneList}}" tt:for-item="phone">
-          <view class="flex flex-center flex-column phone-number">
+          <view class="flex flex-center flex-column phone-number {{selectPhone===phone.num?'isactive':''}}">
             <view class="flex flex-center phone-item-char">
               <view tt:for="{{phone.item}}" tt:for-item="num"
                 style="color:{{num.highlight==='1'?'#fd3134':num.highlight==='2'?'#00b0f0':''}}">
