@@ -24,17 +24,17 @@
           <icon type='search' size='16' class="numpicker-search-icon" />
           <input type="number" class="numpicker-input flex-auto" placeholder="请输入幸运数字" maxlength="8"
             bindinput='bindNumInput' value="{{searchNum}}" />
-          <button class="numpicker-change flex align-middle flex-none" type="primary" size="mini" loading="{{loading}}"
+          <button class="numpicker-change flex align-middle flex-none" type="primary" size="mini" disabled="{{loading}}"
             bindtap="changeNumber">搜索</button>
         </view>
       </view>
 
-      <view class="flex hot-wrap align-middle">
+      <!-- <view class="flex hot-wrap align-middle">
         <view class="flex-none hot-search">热搜：</view>
         <view class="flex flex-wrap">
           <view class="hot-tag" tt:for="{{tagItems}}" data-tag="{{item}}" bindtap="handleHotSearch">{{item}}</view>
         </view>
-      </view>
+      </view> -->
 
       <view class="number-rule">
         <view class="flex flex-wrap space-between">
