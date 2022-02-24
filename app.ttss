@@ -248,3 +248,6 @@ image {
 .c999 {
 	color: #999
 }
+.cblue {
+	color: #3b9cfd
+}
