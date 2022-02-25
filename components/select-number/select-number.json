@@ -1,6 +1,7 @@
 {
   "component": true,
   "usingComponents": {
-
+    "YunPopup": "/components/popup/popup",
+    "YunForms": "/components/forms/forms"
   }
 }
