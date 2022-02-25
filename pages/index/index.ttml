@@ -5,13 +5,7 @@
       <view class="fixex-service" bindtap="goOrder">订单查询</view>
     </view>
     <image class="image" src="../../assets/images/1.jpg" mode="widthFix" />
-    <button bindtap="handleClick">open popup</button>
-    <YunSelectNumber cjData="{{cjData}}"/>
-    <YunPopup id="yun-forms" tt:ref="refForm">
-      <view class="popup-commom-wrap c666">
-        <YunForms class="row" cjData="{{cjData}}" id="YuiForms" bindrefreshPageId="onRefreshPageId" />
-      </view>
-    </YunPopup>
+    <YunSelectNumber cjData="{{cjData}}" />
     <YunMarquee />
     <view class="company-info">
       <view class="txt">【温馨提示】</view>
