@@ -1,66 +1,55 @@
 import AllCity from '../../assets/js/city';
 import ruleList from '../../assets/js/validate.js';
 import Api from '../../api/index'
-import StaticData from '../../assets/js/static-data.js'
+
+const app = getApp();
 
 Component({
   properties: {
     cjData: {
       optionalTypes: ['Object', 'Null'],
       value: null
+    },
+    selectNumItem: {
+      optionalTypes: ['Object', 'Null'],
+      value: null
+    },
+    selectCityStr: {
+      optionalTypes: String,
+      value: ''
     }
   },
   data: {
-    hadCityInfo: false,
+    checkbox1: false,
+    hadPhone: false,
     cityInfo: [],
     ipRegion: [],
-    region: [],
-    regions: '',
     multiIndex: [0, 0, 0],
     multiArr: [],
     multiText: [],
     multiStr: '',
     searchNum: '',
     phoneList: [],
-    selectNumItem: '',
-    selectPhone: '',
     loading: false,
-    agrtext1: StaticData.agrtext1,
-    agrtext2: StaticData.agrtext2,
-    timer: 0,
-    showBottomBtn: true
   },
-  observers: {
-    'cjData.productCode': function (productCode) {
-      if (this.data.hadCityInfo) return
-      if (productCode) {
-        this.getNumber()
-        this.getCityInfo(productCode)
+  // observers: {
+  //   multiText(value) {
+  //     console.log(value);
+  //     if (Array.isArray(value)) this.setData({ multiStr: value.join(' ') })
+  //   }
+  // },
+  methods: {
+    bindPhoneInput(e) {
+      const val = e.detail.value;
+      const valiRes = ruleList.contactNumber(val)
+      if (valiRes === true) {
+        this.setData({ hadPhone: true })
       }
     },
-    multiText(value) {
-      if (Array.isArray(value)) this.setData({ multiStr: value.join(' ') })
-    }
-  },
-  methods: {
-    bindNumInput(e) {
-      const iptVal = e.detail.value;
-      this.setData({ searchNum: iptVal })
-      clearTimeout(this.data.timer)
-      this.data.timer = setTimeout(() => {
-        this.getNumber()
-      }, 300);
-    },
-    handleSelect(phoneItem) {
-      this.setData({
-        selectPhone: phoneItem ? phoneItem.num : '',
-        selectNumItem: phoneItem || ''
-      })
-    },
-    toggleNumPicker() {
-      const elNumPopup = this.selectComponent('#num-popup')
-      elNumPopup.data.show ? elNumPopup.closePopup() : elNumPopup.openPopup()
-    },
+    // toggleNumPicker() {
+    //   const elNumPopup = this.selectComponent('#num-popup')
+    //   elNumPopup.data.show ? elNumPopup.closePopup() : elNumPopup.openPopup()
+    // },
     getMultiText(multiIndex) {
       if (Array.isArray(this.data.multiArr) && this.data.multiArr.length === 0) return []
       const province = this.data.multiArr[0][multiIndex[0]]
@@ -75,7 +64,6 @@ Component({
     async getCityInfo(productCode) {
       const res = await Api.Choujin.getCityInfo({ productCode: productCode })
       if (res && res.length > 0) {
-        this.data.hadCityInfo = true
         this.setData({ cityInfo: res })
         this.setMultiArr(this.data.ipRegion)
       }
@@ -114,7 +102,8 @@ Component({
         this.setData({
           multiArr: [provinces, citys, areas],
           multiIndex: [provinceIndex, cityIndex, areaIndex],
-          multiText: [provinces[provinceIndex], citys[cityIndex], areas[areaIndex]]
+          multiText: [provinces[provinceIndex], citys[cityIndex], areas[areaIndex]],
+          multiStr: [provinces[provinceIndex], citys[cityIndex], areas[areaIndex]].join(' ')
         })
       } else {
         const provinces = cityInfo.map(v => v.cityName) || []
@@ -123,7 +112,8 @@ Component({
         this.setData({
           multiArr: [provinces, citys, areas],
           multiIndex: [0, 0, 0],
-          multiText: [provinces[0], citys[0], areas[0]]
+          multiText: [provinces[0], citys[0], areas[0]],
+          multiStr: [provinces[0], citys[0], areas[0]].join(' ')
         })
       }
     },
@@ -161,102 +151,40 @@ Component({
       }
       params.pageId = this.data.cjData.pageId
       params.pid = this.data.cjData.pid
-      params.handleNo = this.data.selectPhone
+      params.handleNo = this.data.selectNumItem.num
       return params
     },
     async submit(e) {
       const params = this.formatParam(e.detail.value)
       const valiDateRes = this.valiDate(params);
       if (valiDateRes !== true) {
-        tt.pageScrollTo({ selector: '#YuiForms' })
         return tt.showToast({ title: valiDateRes, icon: 'none' })
       }
-      tt.showLoading({ title: '正在提交', mask: true })
-      let res = await Api.Choujin.submitForm(params);
-      tt.hideLoading()
-      if (res.responseCode === '0') {
-        tt.navigateTo({ url: '/pages/success/success' })
-      } else {
-        tt.showModal({
-          showCancel: false,
-          content: res.msg || '提交失败，请稍后重试'
-        })
-        this.triggerEvent('refreshPageId', {}, {})
-      }
+      console.log(params);
+      // tt.showLoading({ title: '正在提交', mask: true })
+      // let res = await Api.Choujin.submitForm(params);
+      // tt.hideLoading()
+      // if (res.responseCode === '0') {
+      //   tt.navigateTo({ url: '/pages/success/success' })
+      // } else {
+      //   tt.showModal({
+      //     showCancel: false,
+      //     content: res.msg || '提交失败，请稍后重试'
+      //   })
+      //   this.triggerEvent('refreshPageId', {}, {})
+      // }
     },
-    toggleAgr1() {
-      const elYunPopup = this.selectComponent('#yun-popup1')
-      elYunPopup.data.show ? elYunPopup.closePopup() : elYunPopup.openPopup()
-    },
-    toggleAgr2() {
-      const elYunPopup = this.selectComponent('#yun-popup2')
-      elYunPopup.data.show ? elYunPopup.closePopup() : elYunPopup.openPopup()
-    },
-    getNumber() {
-      this.setData({ loading: true })
-      this.getHandleNoItem().then(res => {
-        this.setData({ phoneList: res || [], selectNumItem: res[0] || '', selectPhone: res[0].num || '' })
-      }).finally(() => {
-        this.setData({ loading: false })
+    toggleAgr(event) {
+      const link = event.currentTarget.dataset.agrlink
+      tt.navigateTo({
+        url: '/pages/iframe/iframe?url=' + encodeURIComponent(link),
       })
-    },
-    async getHandleNoItem() {
-      const param = {
-        pid: this.data.cjData.pid,
-        searchNum: this.data.searchNum,
-        productCode: this.data.cjData.productCode,
-        sysOrderId: this.data.cjData.pageId,
-      }
-      let res = await Api.Choujin.getHandleNoItem(param);
-      if (res.code === '0000' && Array.isArray(res.data.numItem)) {
-        return res.data.numItem.slice(0, 8)
-      }
-      return []
-    },
-    changeNumber() {
-      if (this.data.loading) return;
-      this.setData({ loading: true })
-      this.getHandleNoItem().then(res => {
-        this.setData({ phoneList: res || [], selectNumItem: res[0] || '', selectPhone: res[0].num || '' })
-      }).finally(() => {
-        this.setData({ loading: false })
-      })
-    },
-    async lockNumber(e) {
-      const phoneIndex = e.currentTarget.dataset.phoneIndex
-      const phoneItem = e.currentTarget.dataset.phoneItem
-      tt.showLoading({ title: '拼命抢号中...', mask: true })
-      const params = {
-        handleNo: phoneItem.num,
-        pid: this.data.cjData.pid,
-        productCode: this.data.cjData.productCode,
-        sysOrderId: this.data.cjData.pageId,
-      }
-      const res = await Api.Choujin.lockNumber(params)
-      tt.hideLoading()
-      if (res.code === '0') {
-        this.handleSelect(phoneItem)
-      } else {
-        tt.showToast({
-          title: '您下手太慢了，该号码已被别的用户选取！',
-          icon: 'none',
-        })
-        this.data.phoneList.splice(phoneIndex, 1)
-        this.setData({ phoneList: this.data.phoneList })
-      }
-    },
+    }
   },
   async ready() {
+    const ipRegion = app.getGlobal('ipRegion')
     this.setData({ cityInfo: AllCity })
-    const res = await Api.Choujin.getIpRegion({})
-    if (res.data) {
-      const ctInfo = res.data || {}
-      const arr = []
-      if (ctInfo.province) arr.push(ctInfo.province)
-      if (ctInfo.city) arr.push(ctInfo.city)
-      if (ctInfo.district) arr.push(ctInfo.district)
-      this.setData({ ipRegion: arr })
-      this.setMultiArr(arr)
-    }
+    if (Array.isArray(ipRegion) && ipRegion.length > 0) this.setData({ ipRegion: ipRegion })
+    if (this.data.cjData.productCode) this.getCityInfo(this.data.cjData.productCode)
   }
 })
