@@ -1,12 +1,21 @@
 .forms-wrap {
-	display: flex;
 	background-color: #fff;
 	border-radius: 30rpx;
 	padding: 10rpx 20rpx 20rpx 20rpx;
 	width: 86vw;
 	overflow: hidden;
 }
-
+.tipnumber{
+	font-size: 28rpx;
+	color: #333;
+	margin: 10rpx 0 16rpx 0;
+}
+.tiptext {
+	text-align: center;
+	font-size: 20rpx;
+	color: #333;
+	margin: 10rpx 0;
+}
 .input {
 	border: none;
 	height: 90rpx;
@@ -51,7 +60,7 @@
 	background-size: 100% 100%;
 }
 .input-placeholder {
-	color: #aaa;
+	color: #999;
 }
 .input-phone {
 	font-size: 16px;
@@ -59,11 +68,15 @@
 
 .form-submit {
 	margin-top: 20rpx;
-	background-image: linear-gradient(to bottom, #ffd272, #ff6706);
+	background-image: linear-gradient(to bottom, #ee7162, #df1823);
 	font-weight: bold;
 	line-height: 2.2;
 	letter-spacing: 5rpx;
 	font-size: 50rpx;
+	border-radius: 50rpx;
+}
+.form-submit::after {
+	display: none;
 }
 
 .agr-wrap {
@@ -71,29 +84,6 @@
 	margin-top: 10px;
 	color: #ccc;
 	line-height: 1.6;
-}
-
-.ks-switch--checkbox {
-	-webkit-appearance: none;
-	outline: 0;
-	margin: 0;
-	margin-right: 5px;
-	border: 1px solid #d1d1d1;
-	background-color: #ccc;
-	border-radius: 3px;
-	width: 14px;
-	height: 14px;
-	position: relative;
-	vertical-align: text-top;
-}
-
-.ks-switch--checkbox-container {
-	vertical-align: text-bottom
-}
-
-.ks-switch--checkbox[checked]::before,
-.ks-switch--checkbox:checked::before {
-	font-size: 14px;
 }
 
 .popup-commom-wrap {
