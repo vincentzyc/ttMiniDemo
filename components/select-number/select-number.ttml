@@ -78,4 +78,9 @@
       <button class="change-button" type="primary" bindtap="getNextPage" loading="{{nextLoading}}">下一页</button>
     </view>
   </view>
+  <YunPopup id="yun-forms" tt:ref="refForm">
+    <view class="popup-commom-wrap c666">
+      <YunForms class="row" cjData="{{cjData}}" selectNumItem="{{selectNumItem}}" selectCityStr="{{multiStr}}"/>
+    </view>
+  </YunPopup>
 </view>
