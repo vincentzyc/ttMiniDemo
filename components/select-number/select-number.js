@@ -3,7 +3,10 @@ import AllCity from '../../assets/js/city';
 
 let allNums = []
 
+const app = getApp();
+
 Component({
+  elForm: null,
   properties: {
     cjData: {
       type: Object | null,
@@ -47,6 +50,10 @@ Component({
     numSize: 20
   },
   methods: {
+    refForm(ref) {
+      // 存储自定义组件实例，方便以后调用
+      this.elForm = ref;
+    },
     showLoading() {
       clearTimeout(this.data.timer)
       this.data.timer = setTimeout(() => {
@@ -146,10 +153,10 @@ Component({
         selectPhone: phoneItem ? phoneItem.num : '',
         selectNumItem: phoneItem || ''
       })
+      this.elForm.openPopup()
     },
     // 锁号
     async lockNumber(e) {
-      console.log(e);
       const phoneIndex = e.currentTarget.dataset.phoneIndex
       const phoneItem = e.currentTarget.dataset.phoneItem
 
@@ -270,6 +277,7 @@ Component({
         if (ctInfo.district) arr.push(ctInfo.district)
         this.setData({ ipRegion: arr })
         this.setMultiArr(arr)
+        app.setGlobal('ipRegion', arr)
         this.getNumber()
       }
     }
