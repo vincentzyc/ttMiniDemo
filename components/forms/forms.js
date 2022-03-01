@@ -161,18 +161,17 @@ Component({
         return tt.showToast({ title: valiDateRes, icon: 'none' })
       }
       console.log(params);
-      // tt.showLoading({ title: '正在提交', mask: true })
-      // let res = await Api.Choujin.submitForm(params);
-      // tt.hideLoading()
-      // if (res.responseCode === '0') {
-      //   tt.navigateTo({ url: '/pages/success/success' })
-      // } else {
-      //   tt.showModal({
-      //     showCancel: false,
-      //     content: res.msg || '提交失败，请稍后重试'
-      //   })
-      //   this.triggerEvent('refreshPageId', {}, {})
-      // }
+      tt.showLoading({ title: '正在提交', mask: true })
+      let res = await Api.Choujin.submitForm(params);
+      tt.hideLoading()
+      if (res.responseCode === '0') {
+        tt.navigateTo({ url: '/pages/success/success' })
+      } else {
+        tt.showModal({
+          showCancel: false,
+          content: res.msg || '提交失败，请稍后重试'
+        })
+      }
     },
     toggleAgr(event) {
       const link = event.currentTarget.dataset.agrlink
