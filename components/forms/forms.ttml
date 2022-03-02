@@ -11,8 +11,8 @@
     </view>
     <view class="input-wrap">
       <view class="input-label">手机号码</view>
-      <input maxlength="11" name="contactNumber" type="number" class="input flex flex-auto"
-        placeholder="请填写本人联系电话（已加密）" bindinput="bindPhoneInput"/>
+      <input maxlength="11" name="contactNumber" type="number" class="input flex flex-auto" placeholder="请填写本人联系电话（已加密）"
+        bindinput="bindPhoneInput" />
     </view>
     <view class="input-wrap" tt:if="{{hadPhone}}">
       <view class="input-label">身份证号</view>
@@ -42,24 +42,8 @@
       <checkbox value="checkbox1" checked="true" />
       <view>
         <span>我已阅读并同意</span>
-        <span class="c999" bindtap="toggleAgr"
-          data-agrLink="https://h5.lipush.com/h5/index.html?id=2021102815452100034">
-          《个人信息保护政策》
-        </span>
-        <span>和</span>
-        <span class="c999" bindtap="toggleAgr"
-          data-agrLink="https://h5.lipush.com/h5/index.html?id=2021102817561400047">
-          《单独同意书》
-        </span>
-        <span>和</span>
-        <span class="c999" bindtap="toggleAgr"
-          data-agrLink="https://h5.lipush.com/h5/index.html?id=2022022414052500011">
-          《入网许可协议》
-        </span>
-        <span>和</span>
-        <span class="c999" bindtap="toggleAgr"
-          data-agrLink="https://h5.lipush.com/h5/index.html?id=2022022414061500012">
-          《个人信息收集证明》
+        <span bindtap="toggleAgr" tt:for="{{agrList}}" data-agrLink="{{item.url}}">
+          <span class="c999">{{item.title}}</span><span>和</span>
         </span>
       </view>
     </view>
