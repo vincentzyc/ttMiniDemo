@@ -1,6 +1,7 @@
 import AllCity from '../../assets/js/city';
 import ruleList from '../../assets/js/validate.js';
 import Api from '../../api/index'
+import { objParam2Str } from '../../utils/index'
 
 const app = getApp();
 
@@ -165,6 +166,7 @@ Component({
       params.pageId = this.data.cjData.pageId
       params.pid = this.data.cjData.pid
       params.handleNo = this.data.selectNumItem.num
+      params.url = objParam2Str(app.getGlobal('query'), 'pages/index/index')
       return params
     },
     async submit(e) {
