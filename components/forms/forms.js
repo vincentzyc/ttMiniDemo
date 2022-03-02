@@ -20,6 +20,19 @@ Component({
     }
   },
   data: {
+    agrList: [{
+      title: '《个人信息保护政策》',
+      url: 'https://h5.lipush.com/h5/index.html?id=2021102815452100034'
+    }, {
+      title: '《单独同意书》',
+      url: 'https://h5.lipush.com/h5/index.html?id=2021102817561400047'
+    }, {
+      title: '《入网许可协议》',
+      url: 'https://h5.lipush.com/h5/index.html?id=2022022414052500011'
+    }, {
+      title: '《个人信息收集证明》',
+      url: 'https://h5.lipush.com/h5/index.html?id=2022022414061500012'
+    }],
     checkbox1: false,
     hadPhone: false,
     cityInfo: [],
@@ -39,6 +52,10 @@ Component({
   //   }
   // },
   methods: {
+    // toggleNumPicker() {
+    //   const elNumPopup = this.selectComponent('#num-popup')
+    //   elNumPopup.data.show ? elNumPopup.closePopup() : elNumPopup.openPopup()
+    // },
     bindPhoneInput(e) {
       const val = e.detail.value;
       const valiRes = ruleList.contactNumber(val)
@@ -46,10 +63,6 @@ Component({
         this.setData({ hadPhone: true })
       }
     },
-    // toggleNumPicker() {
-    //   const elNumPopup = this.selectComponent('#num-popup')
-    //   elNumPopup.data.show ? elNumPopup.closePopup() : elNumPopup.openPopup()
-    // },
     getMultiText(multiIndex) {
       if (Array.isArray(this.data.multiArr) && this.data.multiArr.length === 0) return []
       const province = this.data.multiArr[0][multiIndex[0]]
