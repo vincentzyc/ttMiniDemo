@@ -5,7 +5,7 @@
       <view class="fixex-service" bindtap="goOrder">订单查询</view>
     </view>
     <image class="image" src="../../assets/images/1.jpg" mode="widthFix" />
-    <YunSelectNumber cjData="{{cjData}}" />
+    <YunSelectNumber cjData="{{cjData}}" bindupdatecjdata="getPageId"/>
     <YunMarquee />
     <view class="company-info">
       <view class="txt">【温馨提示】</view>
