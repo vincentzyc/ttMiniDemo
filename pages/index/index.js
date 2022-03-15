@@ -1,8 +1,11 @@
 import Api from '../../api/index'
+
+const app = getApp()
+
 Page({
   elForm: null,
   data: {
-    pid: "25416",
+    pid: "",
     cjData: null,
   },
   handleClick() {
@@ -46,7 +49,7 @@ Page({
   onLoad() {
     const options = tt.getLaunchOptionsSync()
     if (options.query) {
-      const pid = options.query.pid || '25416'
+      const pid = options.query.pid || app.getGlobal('pid') ||'25416'
       this.setData({ pid: pid });
     }
     this.getPageId()
