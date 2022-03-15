@@ -50,6 +50,9 @@ Component({
     numSize: 20
   },
   methods: {
+    onUpdateCjData() {
+      this.triggerEvent("updatecjdata", {});
+    },
     refForm(ref) {
       // 存储自定义组件实例，方便以后调用
       this.elForm = ref;
@@ -276,7 +279,7 @@ Component({
         if (ctInfo.city) arr.push(ctInfo.city)
         if (ctInfo.district) arr.push(ctInfo.district)
         this.setData({ ipRegion: arr })
-        this.setMultiArr(arr)
+        this.setMultiArr()
         app.setGlobal('ipRegion', arr)
         this.getNumber()
       }
