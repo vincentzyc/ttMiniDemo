@@ -175,7 +175,6 @@ Component({
       if (valiDateRes !== true) {
         return tt.showToast({ title: valiDateRes, icon: 'none' })
       }
-      console.log(params);
       tt.showLoading({ title: '正在提交', mask: true })
       let res = await Api.Choujin.submitForm(params);
       tt.hideLoading()
@@ -186,6 +185,7 @@ Component({
           showCancel: false,
           content: res.msg || '提交失败，请稍后重试'
         })
+        this.triggerEvent("updatecjdata", {});
       }
     },
     toggleAgr(event) {
