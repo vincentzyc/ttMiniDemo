@@ -80,7 +80,7 @@
   </view>
   <YunPopup id="yun-forms" tt:ref="refForm">
     <view class="popup-commom-wrap c666">
-      <YunForms class="row" cjData="{{cjData}}" selectNumItem="{{selectNumItem}}" selectCityStr="{{multiStr}}"/>
+      <YunForms class="row" cjData="{{cjData}}" bindupdatecjdata="onUpdateCjData" selectNumItem="{{selectNumItem}}" selectCityStr="{{multiStr}}"/>
     </view>
   </YunPopup>
 </view>
