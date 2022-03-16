@@ -7,6 +7,8 @@
     <image class="image" src="../../assets/images/1.jpg" mode="widthFix" />
     <YunSelectNumber cjData="{{cjData}}" bindupdatecjdata="getPageId"/>
     <YunMarquee />
+    <image class="image" src="../../assets/images/2.jpg" mode="widthFix" />
+    <image class="image" src="../../assets/images/3.jpg" mode="widthFix" />
     <view class="company-info">
       <view class="txt">【温馨提示】</view>
       <view class="txt">1.联通大王卡月费：29元/月</view>
