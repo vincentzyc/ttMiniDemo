@@ -19,6 +19,12 @@
         </picker>
       </view>
 
+      <div class="flex align-center float-placeholder" tt-if="{{showBuoy}}">
+        <view class="float-location flex-none"></view>
+        <p class="flex align-middle placeholder-text flex-auto">请选择您的归属地哦！</p>
+        <view class="float-close flex-none" bindtap="hideBuoy"></view>
+      </div>
+
       <view class="flex flex-center">
         <view class="numpicker-input-wrap flex">
           <icon type='search' size='16' class="numpicker-search-icon" />
@@ -66,9 +72,9 @@
         <view class="phone-item mg-b0"></view>
         <view class="phone-item mg-b0"></view>
       </view>
-      <view tt:else class="flex flex-center flex-column">
+      <view tt:else class="flex flex-center flex-column empty-txt">
         <view>哎呦，没有适合您的号码！</view>
-        <view style="color:#ccc;margin: 5px 0 10px 0;">建议缩短号码字数，例如：88</view>
+        <view style="margin: 5px 0 10px 0;">建议缩短号码字数，例如：88</view>
       </view>
     </view>
 
@@ -80,7 +86,8 @@
   </view>
   <YunPopup id="yun-forms" tt:ref="refForm">
     <view class="popup-commom-wrap c666">
-      <YunForms class="row" cjData="{{cjData}}" bindupdatecjdata="onUpdateCjData" selectNumItem="{{selectNumItem}}" selectCityStr="{{multiStr}}"/>
+      <YunForms class="row" cjData="{{cjData}}" bindupdatecjdata="onUpdateCjData" selectNumItem="{{selectNumItem}}"
+        selectCityStr="{{multiStr}}" />
     </view>
   </YunPopup>
 </view>
