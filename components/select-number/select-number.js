@@ -18,6 +18,7 @@ Component({
     }
   },
   data: {
+    showBuoy: true,
     cityInfo: [],
     multiIndex: [0, 0, 0],
     multiArr: [],
@@ -50,6 +51,11 @@ Component({
     numSize: 20
   },
   methods: {
+    hideBuoy() {
+      this.setData({
+        showBuoy: false
+      })
+    },
     onUpdateCjData() {
       this.triggerEvent("updatecjdata", {});
     },
@@ -270,19 +276,19 @@ Component({
       this.getNumber()
     },
     async initIpNumber() {
-      if (Array.isArray(this.data.ipRegion) && this.data.ipRegion.length > 0) return
-      const res = await Api.Choujin.getIpRegion({})
-      if (res.data) {
-        const ctInfo = res.data || {}
-        const arr = []
-        if (ctInfo.province) arr.push(ctInfo.province)
-        if (ctInfo.city) arr.push(ctInfo.city)
-        if (ctInfo.district) arr.push(ctInfo.district)
-        this.setData({ ipRegion: arr })
-        this.setMultiArr()
-        app.setGlobal('ipRegion', arr)
-        this.getNumber()
-      }
+      // if (Array.isArray(this.data.ipRegion) && this.data.ipRegion.length > 0) return
+      // const res = await Api.Choujin.getIpRegion({})
+      // if (res.data) {
+      //   const ctInfo = res.data || {}
+      // const arr = []
+      //   if (ctInfo.province) arr.push(ctInfo.province)
+      //   if (ctInfo.city) arr.push(ctInfo.city)
+      //   if (ctInfo.district) arr.push(ctInfo.district)
+      // this.setData({ ipRegion: arr })
+      this.setMultiArr()
+      // app.setGlobal('ipRegion', arr)
+      this.getNumber()
+      // }
     }
   },
   async attached() {
