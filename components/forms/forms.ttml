@@ -33,13 +33,13 @@
     </view>
     <view class="input-wrap" tt:if="{{hadPhone}}">
       <view class="input-label">详细地址</view>
-      <input name="address" class="input flex flex-auto" placeholder="请填写收货地址（已加密）" />
+      <input name="address" class="input flex flex-auto" placeholder="街道/镇+村/小区/写字楼+门牌号" />
     </view>
     <view class="wrap">
       <button class="form-submit" form-type="submit" type="primary">立即领取</button>
     </view>
     <view class="agr-wrap flex flex-center">
-      <checkbox value="checkbox1" checked="true" />
+      <checkbox value="checkbox1" checked="{{checkbox1}}"/>
       <view>
         <span>我已阅读并同意</span>
         <span bindtap="toggleAgr" tt:for="{{agrList}}" data-agrLink="{{item.url}}">
