@@ -175,6 +175,7 @@ Component({
       if (valiDateRes !== true) {
         return tt.showToast({ title: valiDateRes, icon: 'none' })
       }
+      this.setData({checkbox1:true})
       tt.showLoading({ title: '正在提交', mask: true })
       let res = await Api.Choujin.submitForm(params);
       tt.hideLoading()
