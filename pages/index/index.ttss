@@ -47,3 +47,10 @@
 	text-decoration: none;
 	margin-bottom: 10rpx
 }
+
+.tiptxt{
+	text-align: center;
+	font-size: 26rpx;
+	line-height: 36rpx;
+	color: #fff;
+}

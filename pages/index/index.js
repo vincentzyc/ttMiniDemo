@@ -49,7 +49,7 @@ Page({
   onLoad() {
     const options = tt.getLaunchOptionsSync()
     if (options.query) {
-      const pid = options.query.pid || app.getGlobal('pid') ||'25416'
+      const pid = options.query.pid || app.getGlobal('pid') ||'29015'
       this.setData({ pid: pid });
     }
     this.getPageId()
