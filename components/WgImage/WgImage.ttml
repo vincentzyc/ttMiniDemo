@@ -1,3 +1,0 @@
-<view style="{{wgStyle}}">
-  <image class="image" tt:for="{{wgItem.imglist}}" src="{{item.img}}" mode="widthFix" data-otherLink="{{item.link}}" bindtap="goUrl"/>
-</view>
