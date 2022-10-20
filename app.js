@@ -1,4 +1,6 @@
+import eventBus from './emiton/index'
 App({
+  ...eventBus,
   onLaunch(options) {
     if (options.query.pid) this.globalData.pid = options.query.pid
     this.globalData.query = options.query
@@ -10,7 +12,8 @@ App({
     return this.globalData[key] || null
   },
   globalData: {
-    pid: '25416',
+    pid: '29015',
+    // pid: '18922', 测试线pid
     query: '',
     ipRegion: []
   }
