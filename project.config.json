@@ -1,36 +1,49 @@
 {
-    "setting": {
-        "urlCheck": true,
-        "es6": true,
-        "postcss": true,
-        "minified": true,
-        "newFeature": true
-    },
-    "appid": "tt6026169bff1f508c01",
-    "projectname": "tt-mini-demo",
-    "condition": {
-        "miniprogram": {
-            "current": -1,
-            "list": [
-                {
-                    "id": 1642990874212,
-                    "name": "web",
-                    "pathName": "pages/web/web",
-                    "query": "h5pg=3&adid=1650693294639115&age=18&clickid=EJuQ19u_qfcCGKf2g74ZIPD89-vIATAMOAFCIjIwMTkxMTIwMTcwODI0MDEwMDI2MDc3MDY4MEEwMUQxN0ZIAQ&creativeid=1650693294639131&creativetype=4&name=lilei",
-                    "scene": "990001",
-                    "launchFrom": "scan",
-                    "location": "qr_code"
-                },
-                {
-                    "id": 1643334307333,
-                    "name": "成功页",
-                    "pathName": "pages/success/success",
-                    "query": "",
-                    "scene": "990001",
-                    "launchFrom": "scan",
-                    "location": "qr_code"
-                }
-            ]
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "newFeature": false,
+    "postcss": false,
+    "mockUpdate": false,
+    "minified": false,
+    "autoPush": false,
+    "scripts": false,
+    "mockLogin": false
+  },
+  "appid": "tt6026169bff1f508c01",
+  "projectname": "tt-mini-demo",
+  "condition": {
+    "miniprogram": {
+      "current": 1666084908007,
+      "list": [
+        {
+          "id": 1643334307333,
+          "name": "成功页",
+          "pathName": "pages/success/success",
+          "query": "",
+          "scene": "990001",
+          "launchFrom": "scan",
+          "location": "qr_code"
+        },
+        {
+          "id": 1647588808032,
+          "name": "带pid页面",
+          "pathName": "pages/index/index",
+          "query": "pid=25293",
+          "scene": "990001",
+          "launchFrom": "scan",
+          "location": "qr_code"
+        },
+        {
+          "id": 1666084908007,
+          "name": "组件页面",
+          "pathName": "pages/h5/h5",
+          "query": "id=3844504856947991609&pid=33910",
+          "scene": "011002",
+          "launchFrom": "search_suggest_list_top",
+          "location": ""
         }
+      ]
     }
+  }
 }
