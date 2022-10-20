@@ -4,7 +4,8 @@
     "pages/order/order",
     "pages/login/login",
     "pages/iframe/iframe",
-    "pages/success/success"
+    "pages/success/success",
+    "pages/h5/h5"
   ],
   "window": {
     "backgroundTextStyle": "light",
