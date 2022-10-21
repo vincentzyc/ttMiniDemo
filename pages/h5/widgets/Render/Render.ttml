@@ -1,0 +1,7 @@
+<view>
+  <view tt:for="{{wgList}}">
+    <WgImage wgItem="{{item}}" tt:if="{{item.type==='imgshow'}}" />
+    <!-- <DxForms cjData="{{cjData}}" bindupdatecjdata="getPageId" tt:if="{{item.type==='placeForm'}}"></DxForms> -->
+    <WgStaticText wgItem="{{item}}" tt:if="{{item.type==='staticText'}}" />
+  </view>
+</view>
