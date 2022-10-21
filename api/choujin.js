@@ -1,4 +1,3 @@
-// export const cjBaseUrl = "https://card-api.liulianglf.cn"
 export const cjBaseUrl = "https://test-card.liulianglf.cn"
 
 export const Choujin = [{

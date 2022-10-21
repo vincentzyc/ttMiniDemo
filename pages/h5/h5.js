@@ -1,6 +1,5 @@
 import Api from '../../api/index'
 
-// const cmsUrl = 'https://h5.lipush.com/service/content/template/'
 const cmsUrl = 'https://test-cms.jetmobo.com/service/content/template/'
 
 Page({
@@ -8,7 +7,7 @@ Page({
     wgList: null,
     pid: "31818",
     defaultPid: "31818",
-    cjData: null,
+    pdData: null,
     pgStyle: "background-color: rgba(255, 255, 255, 1)"
   },
   getPgData(id) {
@@ -37,7 +36,7 @@ Page({
     if (res) {
       res.pid = this.data.pid
       this.setData({
-        cjData: res
+        pdData: res
       });
     }
   },
