@@ -1,0 +1,5 @@
+<view style="{{pgStyle}}">
+  <view>
+    <Render wgList="{{wgList}}" />
+  </view>
+</view>
