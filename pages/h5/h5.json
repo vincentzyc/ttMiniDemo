@@ -1,0 +1,6 @@
+{
+  "backgroundColor": "#ffffff",
+  "usingComponents": {
+    "Render": "/pages/h5/widgets/Render/Render"
+  }
+}
