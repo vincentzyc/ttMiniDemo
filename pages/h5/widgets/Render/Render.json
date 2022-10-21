@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "WgStaticText": "/pages/h5/widgets/WgStaticText/WgStaticText",
+    "WgImage": "/pages/h5/widgets/WgImage/WgImage"
+  }
+}
