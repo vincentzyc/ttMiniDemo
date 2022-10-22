@@ -11,9 +11,7 @@ class EventBus {
     }
     (this.bus[type] = this.bus[type] || []).push(fun);
     if (this.temBus[type]) {
-	  for (let event of this.temBus[type]) {
-        event.call();
-      }
+      this.temBus[type]()
       delete this.temBus[type]
     }
   }
@@ -25,7 +23,7 @@ class EventBus {
         event.call(this, ...param);
       }
     } else {
-      (this.temBus[type] = this.temBus[type] || []).push(() => this.emit(type, ...param))
+      this.temBus[type] = () => this.emit(type, ...param)
     }
   }
   // off 释放
