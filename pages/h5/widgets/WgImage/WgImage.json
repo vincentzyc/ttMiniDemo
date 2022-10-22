@@ -1,4 +1,7 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "YunPopup": "/components/popup/popup",
+    "Render": "/pages/h5/widgets/Render/Render"
+  }
 }
