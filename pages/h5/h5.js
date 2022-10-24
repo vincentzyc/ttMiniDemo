@@ -27,14 +27,14 @@ Page({
       }
     })
   },
-  async getPageId() {
+  async getPageId(pid) {
     const params = {
-      pid: this.data.pid,
+      pid: pid,
       ipLocation: '1'
     }
     let res = await Api.Choujin.getNewPageId(params);
     if (res) {
-      res.pid = this.data.pid
+      res.pid = pid
       this.setData({
         pdData: res
       });
@@ -45,13 +45,7 @@ Page({
   },
   onLoad(options) {
     if (options && options.id) this.getPgData(options.id)
-    if (options && options.pid) {
-      const pid = options.pid || this.data.defaultPid
-      this.setData({
-        pid: pid
-      });
-    }
-    this.getPageId()
+    if (options && options.pid) this.getPageId(options.pid)
   },
   onShow() {
     tt.hideHomeButton();
