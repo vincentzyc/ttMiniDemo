@@ -1,0 +1,23 @@
+{
+  "name": "ttminidemo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vincentzyc/ttMiniDemo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vincentzyc/ttMiniDemo/issues"
+  },
+  "homepage": "https://github.com/vincentzyc/ttMiniDemo#readme",
+  "devDependencies": {
+    "@douyin-microapp/typings": "^1.0.2"
+  }
+}
