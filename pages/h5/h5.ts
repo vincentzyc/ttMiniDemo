@@ -1,4 +1,5 @@
-import Api from '../../api/index'
+import { CommonApi } from '../../api/index'
+import { PageIdLocation } from "../../api/types/common";
 
 const cmsUrl = 'https://test-cms.jetmobo.com/service/content/template/'
 
@@ -7,14 +8,14 @@ Page({
     wgList: null,
     pid: "31818",
     defaultPid: "31818",
-    pdData: null,
+    pdData: null as PageIdLocation | null,
     pgStyle: "background-color: rgba(255, 255, 255, 1)"
   },
-  getPgData(id) {
+  getPgData(id: string | number) {
     tt.request({
       url: cmsUrl + id,
       method: 'GET',
-      success: res => {
+      success: (res: any) => {
         const templateValue = JSON.parse(res.data.data.templateValue)
         const compList = templateValue.list
         this.setData({
@@ -27,12 +28,12 @@ Page({
       }
     })
   },
-  async getPageId(pid) {
+  async getPageId(pid: string) {
     const params = {
       pid: pid,
       ipLocation: '1'
     }
-    let res = await Api.Choujin.getNewPageId(params);
+    let res = await CommonApi.pageIdLocation(params);
     if (res) {
       res.pid = pid
       this.setData({
@@ -40,14 +41,11 @@ Page({
       });
     }
   },
-  onRefreshPageId: function () {
-    this.getPageId()
-  },
   onLoad(options) {
     if (options && options.id) this.getPgData(options.id)
     if (options && options.pid) this.getPageId(options.pid)
   },
   onShow() {
-    tt.hideHomeButton();
+    tt.hideHomeButton({});
   }
 })
