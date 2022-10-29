@@ -1,5 +1,5 @@
 <view>
-  <view tt:for="{{wgList}}">
+  <view tt:for="{{wgList}}" tt:if="{{wgList.length>0}}">
     <WgImage wgItem="{{item}}" tt:if="{{item.type==='imgshow'}}" />
     <WgStaticText wgItem="{{item}}" tt:if="{{item.type==='staticText'}}" />
   </view>
