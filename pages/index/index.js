@@ -1,4 +1,4 @@
-import Api from '../../api/index'
+import {CommonApi} from '../../api/index'
 
 const app = getApp()
 
@@ -37,7 +37,7 @@ Page({
   // },
   async getPageId() {
     const params = { pid: this.data.pid }
-    let res = await Api.Choujin.getPageId(params);
+    let res = await CommonApi.pageIdLocation(params);
     if (res) {
       res.pid = this.data.pid
       this.setData({ cjData: res });

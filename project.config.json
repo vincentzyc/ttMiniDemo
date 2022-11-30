@@ -9,13 +9,15 @@
     "autoPush": false,
     "scripts": false,
     "mockLogin": false,
-    "useCompilerPlugins": ["typescript"]
+    "useCompilerPlugins": [
+      "typescript"
+    ]
   },
   "appid": "tt6026169bff1f508c01",
   "projectname": "tt-mini-demo",
   "condition": {
     "miniprogram": {
-      "current": 1666084908007,
+      "current": 1647588808032,
       "list": [
         {
           "id": 1643334307333,
