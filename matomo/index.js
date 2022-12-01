@@ -1,13 +1,55 @@
-/*
-* UTF-8 encoding
-*/
+
+class Matomo {
+  constructor(miniType) {
+    this.miniType = miniType || tt // 小程序类型
+    this.configTrackerUrl = 'https://dw-m.jetmobo.com/tj'
+    this.configRequestMethod = 'GET'
+    this.configRequestContentType = 'application/x-www-form-urlencoded; charset=UTF-8'
+    this.browserFeatures = {}
+  }
+  /**
+   * 初始化一个跟踪器
+   * @param {String} siteId
+   */
+  initTracker(siteId) {
+
+  }
+  generateRandomUuid() {
+    var browserFeatures = this.miniType.getSystemInfoSync()
+    return hash(
+      JSON.stringify(browserFeatures) +
+      (new Date()).getTime() +
+      Math.random()
+    ).slice(0, 16);
+  }
+  sendXmlHttpRequest(request, callback) {
+    setTimeout(() => {
+      try {
+        this.miniType.request({
+          url: this.configTrackerUrl,
+          data: request,
+          method: this.configRequestMethod,
+          header: {
+            'content-type': this.configRequestContentType
+          },
+          success(res) {
+            callback && callback()
+          },
+          fail(res) {
+            console.log('request fail', miniType.request)
+          }
+        })
+      } catch (error) {
+        console.log('request catch error', error)
+      }
+    }, 50)
+  }
+}
+
 function utf8_encode(argString) {
   return decodeURIComponent(encodeURIComponent(argString))
 }
-/************************************************************
- * sha1
- * - based on sha1 from http://phpjs.org/functions/sha1:512 (MIT / GPL v2)
- ************************************************************/
+
 function sha1(str) {
   // +   original by: Webtoolkit.info (http://www.webtoolkit.info/)
   // + namespaced by: Michael White (http://getsprink.com)
@@ -146,53 +188,3 @@ function sha1(str) {
 
   return temp.toLowerCase();
 }
-/************************************************************
- * end sha1
- ************************************************************/
-
-class Matomo {
-  constructor(miniType) {
-    this.miniType = miniType || tt // 小程序类型
-    this.configTrackerUrl = 'https://dw-m.jetmobo.com/tj'
-    this.configRequestMethod = 'GET'
-    this.configRequestContentType = 'application/x-www-form-urlencoded; charset=UTF-8'
-    this.browserFeatures = {}
-  }
-  /**
-   * 初始化一个跟踪器
-   * @param {String} siteId
-   */
-  initTracker(siteId) {
-
-  }
-  generateRandomUuid() {
-    var browserFeatures = this.miniType.getSystemInfoSync()
-    return hash(
-      JSON.stringify(browserFeatures) +
-      (new Date()).getTime() +
-      Math.random()
-    ).slice(0, 16);
-  }
-  sendXmlHttpRequest(request, callback) {
-    setTimeout(() => {
-      try {
-        this.miniType.request({
-          url: this.configTrackerUrl + (this.configRequestMethod.toLowerCase() === 'GET' ? '?' + request : ''),
-          data: request,
-          method: this.configRequestMethod,
-          header: {
-            'content-type': this.configRequestContentType
-          },
-          success(res) {
-            callback && callback()
-          },
-          fail(res) {
-            console.log('request fail', miniType.request)
-          }
-        })
-      } catch (error) {
-        console.log('request catch error', error)
-      }
-    }, 50)
-  }
-} 
