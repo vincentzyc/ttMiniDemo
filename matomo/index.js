@@ -14,6 +14,7 @@ class Matomo {
   initTracker(siteId) {
 
   }
+  // 生成 uvid
   generateRandomUuid() {
     var browserFeatures = this.miniType.getSystemInfoSync()
     return hash(
@@ -21,6 +22,17 @@ class Matomo {
       (new Date()).getTime() +
       Math.random()
     ).slice(0, 16);
+  }
+  // 生成 pvid
+  generateUniqueId() {
+    var id = '';
+    var chars = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var charLen = chars.length;
+    var i;
+    for (i = 0; i < 6; i++) {
+      id += chars.charAt(Math.floor(Math.random() * charLen));
+    }
+    return id;
   }
   sendXmlHttpRequest(request, callback) {
     setTimeout(() => {
