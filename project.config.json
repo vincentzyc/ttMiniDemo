@@ -32,7 +32,7 @@
           "id": 1647588808032,
           "name": "带pid页面",
           "pathName": "pages/index/index",
-          "query": "pid=25293",
+          "query": "pid=25293&adid=asdf234asdf",
           "scene": "990001",
           "launchFrom": "scan",
           "location": "qr_code"
