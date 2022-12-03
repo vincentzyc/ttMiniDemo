@@ -13,9 +13,22 @@ class Tracker {
     this.pageUrl = ''
     this.pageQuery = {}
   }
+  reportMatomo(action, name) {
+    if (!isNumberOrHasLength(action)) {
+      logConsoleError('action must not be empty filled with whitespaces');
+      return false;
+    }
+    if (!this.pageTitle) return logConsoleError('title must not be empty filled with whitespaces')
+    var category = this.pageTitle + '-' + (this.pageQuery.id || '') + '-' + (this.pageQuery.pid || '')
+    this.trackEvent(category, action, name)
+  }
   trackPageView(pageData) {
-    this.setPageData(pageData)
-    this.logPageView()
+    if (isNumberOrHasLength(pageData) || (isObject(pageData) && pageData.title)) {
+      this.setPageData(pageData)
+      this.logPageView()
+    } else {
+      logConsoleError('trackPageView: page title must not be empty filled with whitespaces')
+    }
   }
   setPageData(pageData) {
     if (isDefined(getCurrentPages) && isFunction(getCurrentPages)) {
@@ -33,7 +46,7 @@ class Tracker {
       if (pageData.query) this.pageQuery = pageData.query
     }
     this.pageUrl = this.getQueryUrl()
-    if (!this.pageTitle) logConsoleWran('trackPageView, 传页面标题可以更好定位分析上报数据哦~')
+    if (!this.pageTitle) logConsoleError('trackPageView: page title must not be empty')
   }
   logPageView() {
     this.pvid = this.generateUniqueId()
@@ -42,7 +55,7 @@ class Tracker {
   }
   trackEvent(category, action, name, value) {
     if (!isNumberOrHasLength(category) || !isNumberOrHasLength(action)) {
-      logConsoleError('上报事件时, 前两个参数 `category` 和 `action` 不能为空');
+      logConsoleError('logging event: Parameters `category` and `action` must not be empty or filled with whitespaces');
       return false;
     }
     var request = this.getRequestObj(this.buildEventRequest(category, action, name, value));
@@ -79,7 +92,7 @@ class Tracker {
     }
     return requestObj
   }
-  // 拼接url，把所有参数
+  // 把所有参数拼接组合成url
   getQueryUrl() {
     var url = this.pageRoute.indexOf('?') > -1 ? this.pageRoute + '&' : this.pageRoute + '?'
     for (const key in this.pageQuery) {
@@ -99,7 +112,7 @@ class Tracker {
         return storageUvid
       }
     } catch (error) {
-      logConsoleError('getStorageSync调用失败');
+      logConsoleError('getStorageSync fail');
     }
     var randomUuid = this.generateRandomUuid()
     this.uvid = randomUuid
@@ -110,7 +123,7 @@ class Tracker {
     try {
       this.miniType.setStorageSync(this.uvidStorageKey, uuid);
     } catch (error) {
-      logConsoleError('setStorageSync调用失败');
+      logConsoleError('setStorageSync fail');
     }
   }
   // 生成 uvid
@@ -119,7 +132,7 @@ class Tracker {
     try {
       browserFeatures = this.miniType.getSystemInfoSync(true)
     } catch (error) {
-      logConsoleError("获取系统信息失败: ", error);
+      logConsoleError("getSystemInfoSync fail: ", error);
     }
     return sha1(
       JSON.stringify(browserFeatures) +
@@ -149,12 +162,10 @@ class Tracker {
             'content-type': this.configRequestContentType
           },
           success(res) {
-            console.log('success', res)
-            callback && callback()
+            callback && callback(res)
           },
           fail(res) {
-            console.log('fail', res)
-            logConsoleError('request fail', this.miniType.request)
+            logConsoleError('request fail', res)
           }
         })
       } catch (error) {
@@ -166,7 +177,7 @@ class Tracker {
 
 export default function matomo(miniType, siteId) {
   if (isObjectEmpty(miniType) || !isNumberOrHasLength(siteId)) {
-    logConsoleError('初始化matomo时，小程序类型 "miniType" 、站点id "siteId" 不能为空');
+    logConsoleError('while init matomo，`miniType` and `siteId` must not be empty or filled with whitespaces');
     return false;
   }
   var tracker = new Tracker(miniType, siteId);
