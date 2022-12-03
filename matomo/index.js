@@ -1,58 +1,94 @@
-
-// class Tracker {
 class Tracker {
   constructor(miniType, siteId) {
     this.miniType = miniType // 小程序类型
     this.configTrackerSiteId = siteId
-    this.configTrackerUrl = '//dw-m.jetmobo.com/tj'
+    this.configTrackerUrl = 'https://dw-m.jetmobo.com/tj'
     this.configRequestMethod = 'GET'
     this.configRequestContentType = 'application/x-www-form-urlencoded; charset=UTF-8'
     this.uvidStorageKey = 'MatomoUvid'
     this.uvid = ''
     this.pvid = ''
+    this.pageTitle = ''
+    this.pageRoute = ''
+    this.pageUrl = ''
+    this.pageQuery = {}
   }
-  trackPageView() {
-
+  trackPageView(pageData) {
+    this.setPageData(pageData)
+    this.logPageView()
+  }
+  setPageData(pageData) {
+    if (isDefined(getCurrentPages) && isFunction(getCurrentPages)) {
+      var pageList = getCurrentPages()
+      var lastPage = isArray(pageList) && pageList.length > 0 ? pageList[pageList.length - 1] : null
+      if (lastPage) {
+        this.pageRoute = lastPage.route || ''
+        this.pageQuery = lastPage.options || {}
+      }
+    }
+    if (isString(pageData)) this.pageTitle = pageData
+    if (isObject(pageData)) {
+      this.pageTitle = pageData.title || ''
+      if (pageData.url) this.pageRoute = pageData.url
+      if (pageData.query) this.pageQuery = pageData.query
+    }
+    this.pageUrl = this.getQueryUrl()
+    if (!this.pageTitle) logConsoleWran('trackPageView, 传页面标题可以更好定位分析上报数据哦~')
+  }
+  logPageView() {
+    this.pvid = this.generateUniqueId()
+    var request = this.getRequestObj({ action_name: this.pageTitle })
+    this.sendXmlHttpRequest(request)
   }
   trackEvent(category, action, name, value) {
-    // Category and Action are required parameters
     if (!isNumberOrHasLength(category) || !isNumberOrHasLength(action)) {
-      logConsoleError('上报事件时: 前两个参数 `category` 和 `action` 不能为空');
+      logConsoleError('上报事件时, 前两个参数 `category` 和 `action` 不能为空');
       return false;
     }
-    var request = getRequest(buildEventRequest(category, action, name, value));
-    sendRequest(request);
+    var request = this.getRequestObj(this.buildEventRequest(category, action, name, value));
+    this.sendXmlHttpRequest(request);
   }
   buildEventRequest(category, action, name, value) {
-    return 'e_c=' + encodeURIComponent(category)
-      + '&e_a=' + encodeURIComponent(action)
-      + (isDefined(name) ? '&e_n=' + encodeURIComponent(name) : '')
-      + (isDefined(value) ? '&e_v=' + encodeURIComponent(value) : '')
-      + '&ca=1';
+    var eventObj = {
+      e_c: category,
+      e_a: action,
+      ca: 1
+    }
+    if (isDefined(name)) eventObj.e_n = name
+    if (isDefined(value)) eventObj.e_v = value
+    return eventObj
   }
-  getRequest(request) {
-    const now = new Date()
-    request += '&idsite=' + configTrackerSiteId +
-      '&rec=1' +
-      '&r=' + String(Math.random()).slice(2, 8) + // keep the string to a minimum
-      '&h=' + now.getHours() + '&m=' + now.getMinutes() + '&s=' + now.getSeconds() +
-      '&url=' + getUrl(currentUrl) +
-      (configReferrerUrl.length ? '&urlref=' + encodeURIComponent(purify(configReferrerUrl)) : '') +
-      (isNumberOrHasLength(configUserId) ? '&uid=' + encodeURIComponent(configUserId) : '') +
-      '&_id=' + cookieVisitorIdValues.uuid +
-
-      '&_idn=' + cookieVisitorIdValues.newVisitor + // currently unused
-      (campaignNameDetected.length ? '&_rcn=' + encodeURIComponent(campaignNameDetected) : '') +
-      (campaignKeywordDetected.length ? '&_rck=' + encodeURIComponent(campaignKeywordDetected) : '') +
-      '&_refts=' + referralTs +
-      (String(referralUrl).length ? '&_ref=' + encodeURIComponent(purify(referralUrl.slice(0, referralUrlMaxLength))) : '') +
-      (charSet ? '&cs=' + encodeURIComponent(charSet) : '') +
-      '&send_image=0';
-    return request
+  getRequestObj(request) {
+    var now = new Date()
+    var requestObj = {
+      idsite: this.configTrackerSiteId,
+      rec: 1,
+      r: String(Math.random()).slice(2, 8), // keep the string to a minimum
+      h: now.getHours(),
+      m: now.getMinutes(),
+      s: now.getSeconds(),
+      url: this.pageUrl,
+      _id: this.uvid,
+      pv_id: this.pvid,
+      send_image: 0
+    }
+    for (const key in request) {
+      if (Object.hasOwnProperty.call(request, key)) {
+        requestObj[key] = request[key];
+      }
+    }
+    return requestObj
   }
-  // 获取url，把参数拼接
-  getUrl() {
-
+  // 拼接url，把所有参数
+  getQueryUrl() {
+    var url = this.pageRoute.indexOf('?') > -1 ? this.pageRoute + '&' : this.pageRoute + '?'
+    for (const key in this.pageQuery) {
+      if (Object.hasOwnProperty.call(this.pageQuery, key)) {
+        const value = this.pageQuery[key];
+        url = url + key + '=' + value + '&'
+      }
+    }
+    return url.slice(0, -1)
   }
   initVisitorId() {
     if (this.uvid) return this.uvid
@@ -113,10 +149,12 @@ class Tracker {
             'content-type': this.configRequestContentType
           },
           success(res) {
+            console.log('success', res)
             callback && callback()
           },
           fail(res) {
-            logConsoleError('request fail', miniType.request)
+            console.log('fail', res)
+            logConsoleError('request fail', this.miniType.request)
           }
         })
       } catch (error) {
@@ -137,72 +175,41 @@ export default function matomo(miniType, siteId) {
   return tracker;
 }
 
-/*
- * Removes hash tag from the URL
- *
- * URLs are purified before being recorded in the cookie,
- * or before being sent as GET parameters
- */
-function purify(url) {
-  var targetPattern;
-  // we need to remove this parameter here, they wouldn't be removed in Matomo tracker otherwise eg
-  // for outlinks or referrers
-  url = removeUrlParameter(url, configVisitorIdUrlParameter);
-  if (configDiscardHashTag) {
-    targetPattern = new RegExp('#.*');
-    return url.replace(targetPattern, '');
-  }
-  return url;
-}
-
-/**
- * Logs an error in the console.
- *  Note: it does not generate a JavaScript error, so make sure to also generate an error if needed.
- * @param message
- */
 function logConsoleError(message) {
-  // needed to write it this way for jslint
   var consoleType = typeof console;
   if (consoleType !== 'undefined' && console && console.error) {
     console.error(message);
   }
 }
-/*
- * Is property defined?
- */
+function logConsoleWran(message) {
+  var consoleType = typeof console;
+  if (consoleType !== 'undefined' && console && console.warn) {
+    console.warn(message);
+  }
+}
 function isDefined(property) {
   var propertyType = typeof property;
 
   return propertyType !== 'undefined';
 }
-
-/*
- * Is property a function?
- */
 function isFunction(property) {
   return typeof property === 'function';
 }
-
-/*
- * Is property an object?
- * @return bool Returns true if property is null, an Object, or subclass of Object (i.e., an instanceof String, Date, etc.)
- */
 function isObject(property) {
   return typeof property === 'object';
 }
-
 function isString(property) {
   return typeof property === 'string' || property instanceof String;
 }
-
 function isNumber(property) {
   return typeof property === 'number' || property instanceof Number;
 }
-
+function isArray(property) {
+  return Object.prototype.toString.call(property).slice(8, -1) === 'Array'
+}
 function isNumberOrHasLength(property) {
   return isDefined(property) && (isNumber(property) || (isString(property) && property.length));
 }
-
 function isObjectEmpty(property) {
   if (!property) {
     return true;
@@ -221,7 +228,6 @@ function isObjectEmpty(property) {
 function utf8_encode(argString) {
   return decodeURIComponent(encodeURIComponent(argString))
 }
-
 function sha1(str) {
   // +   original by: Webtoolkit.info (http://www.webtoolkit.info/)
   // + namespaced by: Michael White (http://getsprink.com)
