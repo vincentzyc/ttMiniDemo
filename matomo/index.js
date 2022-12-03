@@ -11,20 +11,13 @@ class Tracker {
     this.uvid = ''
     this.pvid = ''
   }
-  /**
-  * 初始化一个跟踪器
-  * @param {String} siteId
-  */
-  initTracker(obj) {
-    // obj.siteId
-  }
   trackPageView() {
 
   }
   trackEvent(category, action, name, value) {
     // Category and Action are required parameters
     if (!isNumberOrHasLength(category) || !isNumberOrHasLength(action)) {
-      logConsoleError('Error while logging event: Parameters `category` and `action` must not be empty or filled with whitespaces');
+      logConsoleError('上报事件时: 前两个参数 `category` 和 `action` 不能为空');
       return false;
     }
     var request = getRequest(buildEventRequest(category, action, name, value));
@@ -140,21 +133,6 @@ export default function matomo(miniType, siteId) {
   }
   var tracker = new Tracker(miniType, siteId);
   tracker.initVisitorId()
-  // asyncTrackers.push(tracker);
-
-  // _paq = applyMethodsInOrder(_paq, applyFirst);
-
-  // // apply the queue of actions
-  // for (iterator = 0; iterator < _paq.length; iterator++) {
-  //   if (_paq[iterator]) {
-  //     apply(_paq[iterator]);
-  //   }
-  // }
-
-  // // replace initialization array with proxy object
-  // _paq = new TrackerProxy();
-
-  // Matomo.trigger('TrackerAdded', [tracker]);
   miniType.matomo = tracker
   return tracker;
 }
