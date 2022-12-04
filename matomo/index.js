@@ -19,8 +19,9 @@ class Tracker {
       return false;
     }
     if (!this.pageTitle) return logConsoleError('title must not be empty filled with whitespaces')
-    // id 可换成appid+route
-    var category = this.pageTitle + '-' + (this.pageQuery.id || '') + '-' + (this.pageQuery.pid || '')
+    var appIdRoute = ''
+    if (TMAConfig && TMAConfig.appId) appIdRoute = TMAConfig.appId + "/" + this.pageRoute
+    var category = this.pageTitle + '-' + (this.pageQuery.id || appIdRoute) + '-' + (this.pageQuery.pid || '')
     this.trackEvent(category, action, name)
   }
   trackPageView(pageData) {
