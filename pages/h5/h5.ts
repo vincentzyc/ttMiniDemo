@@ -42,6 +42,8 @@ Page({
     }
   },
   onLoad(options) {
+    // TODO matomo 类型未定义
+    // tt.matomo.trackPageView('测试页面标题')
     if (options && options.id) this.getPgData(options.id)
     if (options && options.pid) this.getPageId(options.pid)
   },
