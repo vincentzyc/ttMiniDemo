@@ -1,9 +1,7 @@
 import eventBus from './emiton/index'
 import matomo from './matomo/index'
 
-matomo(tt, 80)
-
-// console.log(tt.matomo)
+matomo(tt, 1)
 
 App({
   ...eventBus,
