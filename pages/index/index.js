@@ -16,12 +16,11 @@ Page({
     this.elForm = ref;
   },
   goOrder() {
-    // const url = 'https://card.liulianglf.cn/sim/index.html#/login'
-    // tt.navigateTo({
-    //   url: '/pages/iframe/iframe?url=' + encodeURIComponent(url),
-    // })
-    // tt.navigateTo({ url: '/pages/login/login' })
-    tt.matomo.reportMatomo('点击订单查询','pages/login/login')
+    const url = 'https://card.liulianglf.cn/sim/index.html#/login'
+    tt.navigateTo({
+      url: '/pages/iframe/iframe?url=' + encodeURIComponent(url),
+    })
+    tt.navigateTo({ url: '/pages/login/login' })
   },
   complaint() {
     const url = 'https://h5.lipush.com/h5/complaint/index.html'
@@ -48,7 +47,7 @@ Page({
     this.getPageId()
   },
   onLoad() {
-    tt.matomo.trackPageView('测试页面标题')
+    app.matomo.trackPageView('测试页面标题')
     const options = tt.getLaunchOptionsSync()
     if (options.query) {
       const pid = options.query.pid || app.getGlobal('pid') ||'29015'
