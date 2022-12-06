@@ -1,10 +1,9 @@
 import eventBus from './emiton/index'
 import matomo from './matomo/index'
 
-matomo(tt, 1)
-
 App({
   ...eventBus,
+  matomo: matomo(tt, 1),
   onLaunch(options) {
     if (options.query.pid) this.globalData.pid = options.query.pid
     this.globalData.query = options.query
