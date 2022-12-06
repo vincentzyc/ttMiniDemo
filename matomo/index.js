@@ -184,7 +184,6 @@ export default function matomo(miniType, siteId) {
   }
   var tracker = new Tracker(miniType, siteId);
   tracker.initVisitorId()
-  miniType.matomo = tracker
   return tracker;
 }
 
