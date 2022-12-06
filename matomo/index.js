@@ -18,19 +18,19 @@ class Tracker {
       logConsoleError('action must not be empty filled with whitespaces');
       return false;
     }
-    if (!this.pageTitle) return logConsoleError('title must not be empty filled with whitespaces')
+    // if (!this.pageTitle) return logConsoleError('title must not be empty filled with whitespaces')
     var appIdRoute = ''
     if (TMAConfig && TMAConfig.appId) appIdRoute = TMAConfig.appId + "/" + this.pageRoute
     var category = this.pageTitle + '-' + (this.pageQuery.id || appIdRoute) + '-' + (this.pageQuery.pid || '')
     this.trackEvent(category, action, name)
   }
   trackPageView(pageData) {
-    if (isNumberOrHasLength(pageData) || (isObject(pageData) && pageData.title)) {
+    // if (isNumberOrHasLength(pageData) || (isObject(pageData) && pageData.title)) {
       this.setPageData(pageData)
       this.logPageView()
-    } else {
-      logConsoleError('trackPageView: page title must not be empty filled with whitespaces')
-    }
+    // } else {
+    //   logConsoleError('trackPageView: page title must not be empty filled with whitespaces')
+    // }
   }
   setPageData(pageData) {
     if (isDefined(getCurrentPages) && isFunction(getCurrentPages)) {
@@ -48,7 +48,10 @@ class Tracker {
       if (pageData.query) this.pageQuery = pageData.query
     }
     this.pageUrl = this.getQueryUrl()
-    if (!this.pageTitle) logConsoleError('trackPageView: page title must not be empty')
+    if (!this.pageTitle) {
+      // 头条小程序获取默认小程序标题
+      if (TMAConfig && TMAConfig.global && TMAConfig.global.window && TMAConfig.global.window.navigationBarTitleText) this.pageTitle = TMAConfig.global.window.navigationBarTitleText
+    }
   }
   logPageView() {
     this.pvid = this.generateUniqueId()
