@@ -24,6 +24,7 @@ Component({
     },
     goUrl(e) {
       console.log(e, this.data.wgItem)
+      app.matomo.reportMatomo('点击图片')
       this.cpPopup.openPopup()
       // app.busImage.emit.testEmit('HAHA')
       // setTimeout(() => {
