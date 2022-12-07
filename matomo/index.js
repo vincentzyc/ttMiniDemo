@@ -24,13 +24,18 @@ class Tracker {
     var category = this.pageTitle + '-' + (this.pageQuery.id || appIdRoute) + '-' + (this.pageQuery.pid || '')
     this.trackEvent(category, action, name)
   }
+  setPageTitle(title) {
+    if (isString(title)) this.pageTitle = title
+  }
+  setPageRoute(route) {
+    if (isString(route)) this.pageRoute = route
+  }
+  setPageQuery(query) {
+    if (isObject(query)) this.pageQuery = query
+  }
   trackPageView(pageData) {
-    // if (isNumberOrHasLength(pageData) || (isObject(pageData) && pageData.title)) {
-      this.setPageData(pageData)
-      this.logPageView()
-    // } else {
-    //   logConsoleError('trackPageView: page title must not be empty filled with whitespaces')
-    // }
+    this.setPageData(pageData)
+    this.logPageView()
   }
   setPageData(pageData) {
     if (isDefined(getCurrentPages) && isFunction(getCurrentPages)) {
@@ -43,7 +48,7 @@ class Tracker {
     }
     if (isString(pageData)) this.pageTitle = pageData
     if (isObject(pageData)) {
-      this.pageTitle = pageData.title || ''
+      if (pageData.title) this.pageTitle = pageData.title
       if (pageData.url) this.pageRoute = pageData.url
       if (pageData.query) this.pageQuery = pageData.query
     }
